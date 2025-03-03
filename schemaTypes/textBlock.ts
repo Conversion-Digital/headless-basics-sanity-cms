@@ -1,14 +1,18 @@
 import {defineField, defineType} from 'sanity'
-
 export default defineType({
   name: 'textBlock',
   title: 'Text Block',
   type: 'object',
   fields: [
     defineField({
-      name: 'sortOrder',
-      title: 'Sort Order',
-      type: 'number',
+      name: 'selectableVariant',
+      title: 'Selectable Variant',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Default', value: 'default' }
+        ]
+      }
     }),
     defineField({
       name: 'title',

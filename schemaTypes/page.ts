@@ -1,5 +1,4 @@
 import {defineField, defineType} from 'sanity'
-
 export default defineType({
   name: 'page',
   title: 'Page',
@@ -9,6 +8,12 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+    }),
+    defineField({
+      name: 'parent',
+      title: 'Parent Page',
+      type: 'reference',
+      to: [{ type: 'page' }],
     }),
     defineField({
       name: 'description',
