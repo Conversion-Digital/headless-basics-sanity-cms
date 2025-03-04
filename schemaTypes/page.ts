@@ -1,5 +1,8 @@
-import {defineField, defineType} from 'sanity'
-export default defineType({
+import { defineField, defineType } from 'sanity'
+import { definePageType } from '@q42/sanity-plugin-page-tree'
+import { pageTreeConfig } from '../pageTreeConfig'
+
+const _pageType = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
@@ -29,7 +32,6 @@ export default defineType({
         maxLength: 96,
       },
     }),
-    // New page settings fields
     defineField({
       name: 'level',
       title: 'Level',
@@ -81,3 +83,5 @@ export default defineType({
     },
   },
 })
+
+export default definePageType(_pageType, pageTreeConfig)

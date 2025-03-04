@@ -1,14 +1,31 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
-console.log("Sanity Project ID sanity.config.ts :", process.env.PROJECT_ID);
+import { defineConfig } from 'sanity'
+import { StructureBuilder, structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemaTypes'
+import { createPageTreeDocumentList } from '@q42/sanity-plugin-page-tree'
+import { pageTreeConfig } from './pageTreeConfig'
+
+const structure = (S: StructureBuilder) =>
+  S.list()
+    .title('Website')
+    .items([
+      S.listItem()
+        .title('Pages')
+        .child(
+          createPageTreeDocumentList(S, {
+            config: pageTreeConfig,
+            extendDocumentList: (builder) =>
+              builder.id('pages').title('Pages').apiVersion(pageTreeConfig.apiVersion),
+          })
+        )
+    ])
+
 export default defineConfig({
   name: 'default',
   title: 'SanityShowcase',
-  projectId: process.env.PROJECT_ID?.toLowerCase() || '',
+  projectId: process.env.PROJECT_ID?.toLowerCase() || '5he8nsc5',
   dataset: 'production',
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
   },
