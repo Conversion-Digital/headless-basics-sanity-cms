@@ -1,8 +1,14 @@
 import {defineCliConfig} from 'sanity/cli'
+import * as dotenv from 'dotenv'
+
+// Load environment variables
+dotenv.config()
+
+console.log("Sanity Project ID sanity.cli.ts :", process.env.PROJECT_ID); // Debugging
 
 export default defineCliConfig({
   api: {
-    projectId: process.env.PROJECT_ID || 'YOUR_PROJECT_ID',
+    projectId: process.env.PROJECT_ID?.toLowerCase() || '',
     dataset: 'production'
   },
   /**
