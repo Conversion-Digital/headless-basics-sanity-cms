@@ -23,7 +23,7 @@ const structure = (S: StructureBuilder) =>
 export default defineConfig({
   name: 'default',
   title: 'SanityShowcase',
-  projectId: process.env.PROJECT_ID?.toLowerCase() || '5he8nsc5',
+  projectId: process.env.PROJECT_ID?.toLowerCase() || '',
   dataset: 'production',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
