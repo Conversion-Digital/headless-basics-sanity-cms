@@ -3,3 +3,5 @@
 repomix-output.xml
 .env.local
 .env
+sanity.config.ts
+sanity.cli.ts
