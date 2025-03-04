@@ -29,6 +29,31 @@ export default defineType({
         maxLength: 96,
       },
     }),
+    // New page settings fields
+    defineField({
+      name: 'level',
+      title: 'Level',
+      type: 'string',
+      options: {
+        list: [
+          { title: '1', value: '1' },
+          { title: '2', value: '2' },
+          { title: '3', value: '3' },
+          { title: '4', value: '4' },
+          { title: '5', value: '5' }
+        ]
+      }
+    }),
+    defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number'
+    }),
+    defineField({
+      name: 'showInNavigation',
+      title: 'Show in Navigation',
+      type: 'boolean'
+    }),
     defineField({
       name: 'seo',
       title: 'SEO',
@@ -44,8 +69,8 @@ export default defineType({
       title: 'Components',
       type: 'array',
       of: [
-        {type: 'hero'},
-        {type: 'textBlock'}
+        { type: 'hero' },
+        { type: 'textBlock' }
       ],
     }),
   ],

@@ -1,5 +1,4 @@
 import {defineField, defineType} from 'sanity'
-
 export default defineType({
   name: 'seo',
   title: 'SEO',
@@ -22,6 +21,17 @@ export default defineType({
       options: {
         hotspot: true,
       },
+    }),
+    // New SEO settings fields
+    defineField({
+      name: 'showInSitemap',
+      title: 'Show in Sitemap',
+      type: 'boolean'
+    }),
+    defineField({
+      name: 'pageNoIndex',
+      title: 'Page No Index?',
+      type: 'boolean'
     }),
   ],
 })
