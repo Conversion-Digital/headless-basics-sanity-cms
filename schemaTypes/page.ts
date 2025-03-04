@@ -13,24 +13,9 @@ const _pageType = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'parent',
-      title: 'Parent Page',
-      type: 'reference',
-      to: [{ type: 'page' }],
-    }),
-    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
-    }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
     }),
     defineField({
       name: 'level',
