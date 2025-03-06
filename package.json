@@ -1,5 +1,5 @@
 {
-  "name": "sanityshowcase",
+  "name": "@conversiondigital/headless-basics-sanityshowcase",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -18,10 +18,12 @@
     "@q42/sanity-plugin-page-tree": "1.5.0-alpha.0",
     "@sanity/vision": "^3.77.2",
     "dotenv": "^16.0.0",
+    "grid": "^4.10.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanity": "^3.77.2",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "tabs": "^0.2.0"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.1",

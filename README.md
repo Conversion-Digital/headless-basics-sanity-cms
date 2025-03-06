@@ -9,3 +9,14 @@ Now you can do the following things:
 - [Read the blog post about this template](https://www.sanity.io/blog/build-your-own-blog-with-sanity-and-next-js?utm_source=readme)
 - [Join the community Slack](https://slack.sanity.io/?utm_source=readme)
 - [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+
+
+
+https://www.sanity.io/plugins/sanity-plugin-link-field
+https://www.sanity.io/plugins/sanity-block-selector
+https://www.sanity.io/plugins/sanity-kit
+https://www.sanity.io/plugins/rich-date-input
+https://www.sanity.io/plugins/sanity-plugin-youtube-input
+https://www.sanity.io/plugins/sanity-plugin-simpler-color-input
+https://www.sanity.io/plugins/table
+https://www.sanity.io/guides/how-to-use-structured-content-for-page-building
