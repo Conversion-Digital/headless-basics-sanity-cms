@@ -1,7 +1,21 @@
 import { defineField, defineType } from 'sanity'
 import { definePageType } from '@q42/sanity-plugin-page-tree'
+import SanityGrid from '../grid/SanityGrid'
+import { basic } from '../grid/basic'
 import { pageTreeConfig } from '../pageTreeConfig'
 
+const customItemFields = [
+  {
+    title: "Username",
+    name: "username",
+    type: "string"
+  },
+  {
+    title: "Profile Photo",
+    name: "userimg",
+    type: "image"
+  }
+];
 
 export const pageFields = [
   defineField({
@@ -49,15 +63,53 @@ export const pageFields = [
     type: 'pageMeta'
   }),
   defineField({
+    title: "Sanity Grid",
+    name: "sanitygrid",
+    type: "object",
+    fields: [
+      {
+        name: "grid",
+        type: "array",
+        of: [
+          {
+            title: "Grid Item",
+            name: "griditem",
+            type: "object",
+            fields: [
+              ...customItemFields,
+              {
+                name: "settings",
+                type: "object",
+                fields: [...basic.item]
+              }
+            ],
+            preview: {
+              select: {
+                title: "username",
+                media: "userimg"
+              }
+            }
+          }
+        ],
+        components: {
+          input: SanityGrid
+        }
+      }
+    ]
+  }),
+  defineField({
     name: 'components',
     title: 'Components',
     type: 'array',
     of: [
       { type: 'hero' },
-      { type: 'textBlock' }
+      { type: 'toggle' },
+      { type: 'textBlock' },
+      { type: 'motto' },
+      { type: 'accordion' }
     ],
   }),
-]
+];
 
 const _pageType = defineType({
   name: 'page',
@@ -70,6 +122,6 @@ const _pageType = defineType({
       subtitle: 'slug.current',
     },
   },
-})
+});
 
-export default definePageType(_pageType, pageTreeConfig)
+export default definePageType(_pageType, pageTreeConfig);
