@@ -23,7 +23,7 @@ export function resolveTypeName(value: any) {
 
 export function getMemberType(value: any, parentType: any) {
   const itemTypeName = resolveTypeName(value)
-  return parentType.of.find((memberType: any) => memberType.name === itemTypeName)
+  return parentType.of.find((memberType: any) => memberType.name === itemTypeName) || parentType.of[0]
 }
 
 export const randomKey = randomKeyFn

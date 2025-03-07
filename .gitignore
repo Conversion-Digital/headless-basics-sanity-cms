@@ -6,3 +6,4 @@ repomix-output.xml
 sanity.config.ts
 sanity.cli.ts
 /sanity-plugin-grid-master
+/sanity-plugin-workflow-example-main
