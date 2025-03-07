@@ -15,7 +15,7 @@ const customItemFields = [
     name: "userimg",
     type: "image"
   }
-];
+]
 
 export const pageFields = [
   defineField({
@@ -66,8 +66,13 @@ export const pageFields = [
     title: "Sanity Grid",
     name: "sanitygrid",
     type: "object",
+    groups: [
+      { name: 'visual', title: 'Grid Visual' },
+      { name: 'settings', title: 'Grid Settings' }
+    ],
     fields: [
       {
+        group: 'visual',
         name: "grid",
         type: "array",
         of: [
@@ -94,6 +99,24 @@ export const pageFields = [
         components: {
           input: SanityGrid
         }
+      },
+      {
+        group: 'settings',
+        name: 'layoutSettings',
+        type: 'object',
+        title: 'Layout Settings',
+        fields: [
+          {
+            name: 'columns',
+            type: 'number',
+            title: 'Columns'
+          },
+          {
+            name: 'spacing',
+            type: 'string',
+            title: 'Spacing'
+          }
+        ]
       }
     ]
   }),
@@ -109,7 +132,7 @@ export const pageFields = [
       { type: 'accordion' }
     ],
   }),
-];
+]
 
 const _pageType = defineType({
   name: 'page',
@@ -122,6 +145,6 @@ const _pageType = defineType({
       subtitle: 'slug.current',
     },
   },
-});
+})
 
-export default definePageType(_pageType, pageTreeConfig);
+export default definePageType(_pageType, pageTreeConfig)

@@ -5,3 +5,4 @@ repomix-output.xml
 .env
 sanity.config.ts
 sanity.cli.ts
+/sanity-plugin-grid-master

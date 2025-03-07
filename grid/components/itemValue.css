@@ -1,0 +1,16 @@
+.value_container {
+  background-color: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+  height: 100%;
+  margin: 1px;
+  padding: 0.25rem;
+}
+.value_container:focus {
+  outline: none;
+}
+.value_container img {
+  border-radius: 50%;
+}
