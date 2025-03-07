@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import {Preview, FormBuilderInput, PatchEvent} from 'sanity'
-import {Dialog, Card, Flex, Button, Stack} from '@sanity/ui'
+import React, { useState } from 'react'
+import { Preview, PatchEvent, ObjectInput } from 'sanity'
+import { Dialog, Card, Flex, Button, Stack } from '@sanity/ui'
 import styles from './itemValue.css'
-import {getMemberType} from '../utils'
+import { getMemberType } from '../utils'
 
 interface ItemValueProps {
   value: any
@@ -39,23 +39,31 @@ function isEmpty(itemVal: any): boolean {
 }
 
 const RenderItemValue: React.FC<ItemValueProps> = (props) => {
-  const {value, type, markers, focusPath, onFocus, onBlur, readOnly, filterField, onChange, onRemove} = props
-  const [isExpanded, setIsExpanded] = useState(false)
+  const {
+    value,
+    type,
+    markers,
+    focusPath,
+    onFocus,
+    onBlur,
+    readOnly,
+    filterField,
+    onChange,
+    onRemove,
+  } = props
 
+  const [isExpanded, setIsExpanded] = useState(false)
   const memberType = getMemberType(value, type)
 
   const handleEditStart = () => {
     setIsExpanded(true)
   }
-
   const handleEditStop = () => {
     setIsExpanded(false)
   }
-
   const handleRemove = () => {
     onRemove(value)
   }
-
   const handleDialogAction = (action: any) => {
     if (action.name === 'close' || action.name === 'cancel') {
       handleEditStop()
@@ -88,19 +96,19 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       >
         <Card padding={4}>
           <Stack space={4}>
-            <FormBuilderInput
-              type={memberType}
-              level={0}
+            <ObjectInput
               value={itemIsEmpty ? undefined : item}
+              schemaType={memberType}
               onChange={handleFieldChange}
+              path={[{ _key: item._key }]}
+              focusPath={focusPath}
               onFocus={onFocus}
               onBlur={onBlur}
-              focusPath={focusPath}
               readOnly={readOnly || memberType?.readOnly}
               markers={childMarkers}
-              path={[{_key: item._key}]}
               filterField={filterField}
             />
+
             <Flex justify="flex-end" gap={2}>
               {actions.map((action: any) => (
                 <Button
