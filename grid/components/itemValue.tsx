@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Preview, PatchEvent, ObjectInput } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack } from '@sanity/ui'
-import styles from './itemValue.css'
+import styles from './itemValue.module.css'
 import { getMemberType } from '../utils'
 
 interface ItemValueProps {

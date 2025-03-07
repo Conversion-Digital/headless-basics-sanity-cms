@@ -7,7 +7,7 @@ import Draggable from 'gsap/Draggable'
 import useEventListener from './utils/hooks/useEventListener'
 import {createProtoValue, randomKey, getMemberType} from './utils'
 import RenderItemValue from './components/itemValue'
-import styles from './component.css'
+import styles from './component.module.css'
 
 // Local function to replicate startsWith check on array paths
 function pathStartsWith(path: any[], prefix: any[]): boolean {
