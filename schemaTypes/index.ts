@@ -8,5 +8,18 @@ import heroButton from './heroButton'
 import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
+import gridBlock from './gridBlock'
 
-export const schemaTypes = [homepage, page, hero, heroButton, textBlock, seo, pageMeta, toggle, motto, accordion]
+export const schemaTypes = [
+  homepage,
+  page,
+  hero,
+  heroButton,
+  textBlock,
+  seo,
+  pageMeta,
+  toggle,
+  motto,
+  accordion,
+  gridBlock
+]

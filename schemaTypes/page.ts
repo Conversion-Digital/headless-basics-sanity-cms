@@ -62,7 +62,6 @@ export const pageFields = [
     title: 'Meta Data',
     type: 'pageMeta'
   }),
-  // Ensuring the "sanitygrid" field is declared as an object with an array "of"
   defineField({
     title: 'Sanity Grid',
     name: 'sanitygrid',
@@ -76,7 +75,6 @@ export const pageFields = [
         group: 'visual',
         name: 'grid',
         type: 'array',
-        // "of" definition ensures type.of[0] won't be undefined
         of: [
           {
             title: 'Grid Item',
@@ -131,7 +129,8 @@ export const pageFields = [
       { type: 'toggle' },
       { type: 'textBlock' },
       { type: 'motto' },
-      { type: 'accordion' }
+      { type: 'accordion' },
+      { type: 'gridBlock' } // Added the new gridBlock here
     ],
   }),
 ]
