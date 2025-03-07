@@ -1,6 +1,6 @@
 import React, {forwardRef, useEffect, useRef} from 'react'
-import PropTypes from 'prop-types'
-import {Preview, set, setIfMissing, unset, insert, PatchEvent} from 'sanity'
+import type {ArrayOfObjectsInputProps, ArraySchemaType, PatchEvent} from 'sanity'
+import {Preview, set, setIfMissing, unset, insert} from 'sanity'
 import {Button, Stack, Card} from '@sanity/ui'
 import gsap from 'gsap'
 import Draggable from 'gsap/Draggable'
@@ -9,13 +9,17 @@ import {createProtoValue, randomKey, getMemberType} from './utils'
 import RenderItemValue from './components/itemValue'
 import styles from './component.module.css'
 
-// Local function to replicate startsWith check on array paths
 function pathStartsWith(path: any[], prefix: any[]): boolean {
   if (prefix.length > path.length) return false
   for (let i = 0; i < prefix.length; i++) {
     const pVal = prefix[i]
     const pathVal = path[i]
-    if (typeof pVal === 'object' && pVal !== null && '_key' in pVal && '_key' in pathVal) {
+    if (
+      typeof pVal === 'object' &&
+      pVal !== null &&
+      '_key' in pVal &&
+      '_key' in pathVal
+    ) {
       if (pVal._key !== pathVal._key) return false
     } else if (pVal !== pathVal) {
       return false
@@ -26,47 +30,21 @@ function pathStartsWith(path: any[], prefix: any[]): boolean {
 
 gsap.registerPlugin(Draggable)
 
-const NO_MARKERS: any[] = []
-
-interface GridItem {
-  _key?: string
-  _type?: string
-  settings?: {
-    width?: number
-    height?: number
-    posX?: number
-    posY?: number
-  }
-  [key: string]: any
-}
-
-interface GridProps {
-  level: number
-  value?: GridItem[]
-  type: {
-    of: any[]
-    name?: string
-    title?: string
-    readOnly?: boolean
-  }
-  document?: any
-  onChange: (event: PatchEvent) => void
-  readOnly?: boolean
-  markers?: any[]
-  focusPath?: any[]
-  onFocus?: (path: any[]) => void
-  onBlur?: () => void
-  filterField?: (type: any, field: any) => boolean
-}
-
-const colFallback = 6
-const rowFallback = 4
-
-const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
+/**
+ * A custom array input for grid items.
+ * Note: Using ArrayOfObjectsInputProps ensures we align with Sanity's
+ * expected signature for array input components.
+ */
+function SanityGrid(
+  props: ArrayOfObjectsInputProps<any, ArraySchemaType>
+) {
   const {
     level,
     value = [],
+    // The `type` is the schema type for this array, must include `of`.
     type,
+    schemaType,
+    // The root document for the form
     document,
     onChange,
     readOnly,
@@ -79,9 +57,12 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
 
   const gridRef = useRef<HTMLUListElement>(null)
   const draggableRef = useRef<any>(null)
+  const colFallback = 6
+  const rowFallback = 4
 
-  const rows = document?.sanitygrid?.layoutSettings?.rows || rowFallback
-  const columns = document?.sanitygrid?.layoutSettings?.columns || colFallback
+  // Attempt to retrieve row/column from document settings if available
+  const rows = (document as any)?.sanitygrid?.layoutSettings?.rows || rowFallback
+  const columns = (document as any)?.sanitygrid?.layoutSettings?.columns || colFallback
 
   const gridDetails = {
     rowHeight: 0,
@@ -95,10 +76,9 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       console.error('Sanity Grid Input could not find the dragged element.')
       return
     }
-
     const {rowHeight, columnWidth} = gridDetails
     const itemKey = closestElement.dataset.key
-    const foundItem = (value || []).find((element) => element._key === itemKey)
+    const foundItem = (value || []).find((element: any) => element._key === itemKey)
     if (!foundItem) return
 
     const gridBounding = gridRef.current?.getBoundingClientRect()
@@ -109,13 +89,12 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       x: Math.round(elementBounding.left - gridBounding.left),
       y: Math.round(elementBounding.top - gridBounding.top),
     }
-
     const pos = {
       col: Math.round(diffs.x / columnWidth) + 1,
       row: Math.round(diffs.y / rowHeight) + 1,
     }
 
-    let newItem = {...foundItem}
+    const newItem = {...foundItem}
     if (!newItem.settings) newItem.settings = {}
     newItem.settings.posX = pos.col
     newItem.settings.posY = pos.row
@@ -133,7 +112,6 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
     const snap = (val: number, snapTo: number) => {
       return Math.round(val / snapTo) * snapTo
     }
-
     draggableRef.current = Draggable.create(`.${styles.grid_item}`, {
       bounds: gridRef.current,
       throwProps: true,
@@ -158,13 +136,13 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
 
   useEventListener('resize', handleResize)
 
-  useEffect(() => {
+  React.useEffect(() => {
     updateGridDetails()
     createDraggable()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleItemChange = (patchEvent: PatchEvent, item: GridItem) => {
+  const handleItemChange = (patchEvent: PatchEvent, item: any) => {
     const memberType = getMemberType(item, type)
     if (!memberType || memberType.readOnly) {
       return
@@ -177,7 +155,17 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
     )
   }
 
-  const removeItem = (item: GridItem) => {
+  const handleAddItem = () => {
+    // Defensive check for the array's "of" definition
+    if (!type?.of?.[0]) {
+      console.error("Grid schema type is missing 'of' definition. Could not add item.")
+      return
+    }
+    const newValue = createProtoValue(type.of[0])
+    onChange(PatchEvent.from([setIfMissing([]), insert([newValue], 'after', [-1])]))
+  }
+
+  const removeItem = (item: any) => {
     onChange(
       PatchEvent.from([
         unset(
@@ -189,13 +177,8 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
     )
   }
 
-  const handleRemoveItem = (item: GridItem) => {
+  const handleRemoveItem = (item: any) => {
     removeItem(item)
-  }
-
-  const handleAddItem = () => {
-    const newValue = createProtoValue(type.of[0])
-    onChange(PatchEvent.from([setIfMissing([]), insert([newValue], 'after', [-1])]))
   }
 
   const renderShadowGrid = (cols: number, rowCount: number) => {
@@ -210,20 +193,20 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
     if (!value || !value.length) {
       return <p style={{color: '#666'}}>No grid items created yet</p>
     }
-
-    const gridStyles = {
+    const gridStyles: React.CSSProperties = {
+      display: 'grid',
       gridTemplateColumns: `repeat(${columns}, 1fr)`,
       gridTemplateRows: `repeat(${rows}, 1fr)`,
+      position: 'relative',
+      gap: '5px',
     }
 
     return (
       <ul ref={gridRef} className={styles.grid_field} style={gridStyles}>
-        {value.map((item, i) => {
-          // Replacing startsWith with local pathStartsWith
+        {value.map((item: any, i: number) => {
           const isChildMarker = (marker: any) =>
             pathStartsWith(marker.path, [i]) ||
             pathStartsWith(marker.path, [{_key: item && item._key}])
-
           const childMarkers = markers.filter(isChildMarker)
           const {width, height, posX, posY} = item.settings || {}
           return (
@@ -242,7 +225,7 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
                 type={type}
                 value={item}
                 level={level}
-                markers={childMarkers?.length === 0 ? NO_MARKERS : childMarkers}
+                markers={childMarkers.length === 0 ? [] : childMarkers}
                 onRemove={handleRemoveItem}
                 onChange={handleItemChange}
                 focusPath={focusPath}
@@ -262,7 +245,7 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
   }
 
   return (
-    <Card ref={ref} padding={3} style={{border: '1px solid #eee'}}>
+    <Card ref={props.elementRef as any} padding={3} style={{border: '1px solid #eee'}}>
       <Stack space={3}>
         {renderGrid()}
         {!readOnly && (
@@ -271,19 +254,9 @@ const SanityGrid = forwardRef<HTMLDivElement, GridProps>((props, ref) => {
       </Stack>
     </Card>
   )
-})
-
-SanityGrid.propTypes = {
-  type: PropTypes.shape({
-    of: PropTypes.array.isRequired,
-    name: PropTypes.string,
-    title: PropTypes.string,
-    readOnly: PropTypes.bool,
-  }).isRequired,
-  level: PropTypes.number.isRequired,
-  value: PropTypes.array,
-  onChange: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool,
 }
 
-export default SanityGrid
+// Export as forwardRef to maintain the typical pattern, but typed for array input
+export default forwardRef<HTMLDivElement>(function ForwardedGrid(props, ref) {
+  return <SanityGrid {...props} elementRef={ref} />
+})

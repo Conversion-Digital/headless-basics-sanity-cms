@@ -6,14 +6,14 @@ import { pageTreeConfig } from '../pageTreeConfig'
 
 const customItemFields = [
   {
-    title: "Username",
-    name: "username",
-    type: "string"
+    title: 'Username',
+    name: 'username',
+    type: 'string'
   },
   {
-    title: "Profile Photo",
-    name: "userimg",
-    type: "image"
+    title: 'Profile Photo',
+    name: 'userimg',
+    type: 'image'
   }
 ]
 
@@ -62,10 +62,11 @@ export const pageFields = [
     title: 'Meta Data',
     type: 'pageMeta'
   }),
+  // Ensuring the "sanitygrid" field is declared as an object with an array "of"
   defineField({
-    title: "Sanity Grid",
-    name: "sanitygrid",
-    type: "object",
+    title: 'Sanity Grid',
+    name: 'sanitygrid',
+    type: 'object',
     groups: [
       { name: 'visual', title: 'Grid Visual' },
       { name: 'settings', title: 'Grid Settings' }
@@ -73,25 +74,26 @@ export const pageFields = [
     fields: [
       {
         group: 'visual',
-        name: "grid",
-        type: "array",
+        name: 'grid',
+        type: 'array',
+        // "of" definition ensures type.of[0] won't be undefined
         of: [
           {
-            title: "Grid Item",
-            name: "griditem",
-            type: "object",
+            title: 'Grid Item',
+            name: 'griditem',
+            type: 'object',
             fields: [
               ...customItemFields,
               {
-                name: "settings",
-                type: "object",
+                name: 'settings',
+                type: 'object',
                 fields: [...basic.item]
               }
             ],
             preview: {
               select: {
-                title: "username",
-                media: "userimg"
+                title: 'username',
+                media: 'userimg'
               }
             }
           }
