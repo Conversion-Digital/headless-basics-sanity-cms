@@ -124,17 +124,29 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
   }, [])
 
   const handleItemChange = (patchEvent: PatchEvent, item: any) => {
-    const memberType = getMemberType(item, schemaType)
-    if (!memberType || memberType.readOnly) {
-      return
+    
+    if (!item) {
+      console.error("handleItemChange received a null item");
+      return;
     }
-    const key = item._key || randomKey(12)
+    
+    const memberType = getMemberType(item, schemaType);
+    if (!memberType || memberType.readOnly) {
+      return;
+    }
+    
+    let key = item?._key;
+    if (!key) {
+      key = randomKey(12); // Ensure a valid _key is assigned
+      item._key = key; // Mutate item directly to ensure it has a _key
+    }
+  
     onChange(
       patchEvent
-        .prefixAll({_key: key})
-        .prepend(item._key ? [] : [set(key, [value.indexOf(item), '_key'])])
-    )
-  }
+        .prefixAll({ _key: key })
+        .prepend(item?._key ? [] : [set(key, [{ _key: key }])]) // Ensure _key is valid
+    );
+  };
 
   const handleAddItem = () => {
     if (!schemaType?.of?.[0]) {
