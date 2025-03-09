@@ -69,11 +69,9 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     const itemKey = closestElement.dataset.key
     const foundItem = (value || []).find((element: any) => element._key === itemKey)
     if (!foundItem) return
-
     const gridBounding = gridRef.current?.getBoundingClientRect()
     const elementBounding = closestElement.getBoundingClientRect()
     if (!gridBounding) return
-
     const diffs = {
       x: Math.round(elementBounding.left - gridBounding.left),
       y: Math.round(elementBounding.top - gridBounding.top),
@@ -130,37 +128,25 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     createDraggable()
   }, [])
 
-  /**
-   * Instead of prefixAll({ _key: key }), we directly set the updatedItem object
-   * into the array by referencing the parent's array item with that _key.
-   * This avoids the "Expected field name to be a string" error.
-   */
   const handleItemChange = (patchEvent: PatchEvent, item: any) => {
     if (!item) {
       console.error("handleItemChange received no valid item, skipping update")
       return
     }
-    let updatedItem = item
-
-    const patchZero = patchEvent.patches[0] as any;
-    const componentx = patchZero.value.component[0];
-
-    updatedItem._componenttype = componentx._type;
-
+    // Just apply the patch to get the updated item
+    const updatedItem = patchEvent.apply(item)
     const memberType = getMemberType(item, schemaType)
     if (!memberType || memberType.readOnly) {
       return
     }
-    let key = item._key
+    let key = updatedItem._key
     if (!key) {
       key = randomKey(12)
-      item._key = key
+      updatedItem._key = key
     }
 
-    // Merge patchEvent changes into item
-    // const updatedItem = patchEvent.apply(item)
+    // We do not force _componenttype here anymore; that's handled in itemValue
 
-    // Now set updatedItem in the array at the position matching _key
     onChange(
       PatchEvent.from(set(updatedItem, [{_key: updatedItem._key}]))
     )
@@ -213,6 +199,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       position: 'relative',
       gap: '5px',
     }
+
     return (
       <ul ref={gridRef} className={styles.grid_field} style={gridStyles}>
         {value.map((item: any, i: number) => {
