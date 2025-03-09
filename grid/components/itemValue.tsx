@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
-import { Preview, PatchEvent, ObjectInput, FormPatch, FieldProps, InputProps, ObjectItemProps, Path, RenderPreviewCallbackProps } from 'sanity'
-import { Dialog, Card, Flex, Button, Stack } from '@sanity/ui'
+import {
+  Preview,
+  PatchEvent,
+  ObjectInput,
+  FormPatch,
+  FieldProps,
+  InputProps,
+  ObjectItemProps,
+  Path,
+  RenderPreviewCallbackProps,
+} from 'sanity'
+import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
 import { getMemberType } from '../utils'
 
@@ -38,6 +48,13 @@ function isEmpty(itemVal: any): boolean {
   return Object.keys(itemVal).every((key) => IGNORE_KEYS.includes(key))
 }
 
+const AVAILABLE_COMPONENT_TYPES = [
+  { label: 'Hero', value: 'hero' },
+  { label: 'Motto', value: 'motto' },
+  { label: 'Toggle', value: 'toggle' },
+  { label: 'Text Block', value: 'textBlock' },
+]
+
 const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const {
     value,
@@ -51,19 +68,24 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     onChange,
     onRemove,
   } = props
+
   const [isExpanded, setIsExpanded] = useState(false)
+  const [newComponentType, setNewComponentType] = useState<string>('')
 
   const memberType = getMemberType(value, type)
 
   const handleEditStart = () => {
     setIsExpanded(true)
   }
+
   const handleEditStop = () => {
     setIsExpanded(false)
   }
+
   const handleRemove = () => {
     onRemove(value)
   }
+
   const handleDialogAction = (action: any) => {
     if (action.name === 'close' || action.name === 'cancel') {
       handleEditStop()
@@ -74,18 +96,74 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       }
     }
   }
+
   const handleFieldChange = (patch: PatchEvent | FormPatch | FormPatch[]) => {
     onChange(patch as PatchEvent, value)
   }
 
+  const handleAddComponent = () => {
+    if (!newComponentType) return
+    const itemClone = {...value}
+    if (!itemClone.component) itemClone.component = []
+    itemClone.component = [{_type: newComponentType}]
+    onChange(PatchEvent.from([itemClone]))
+  }
+
+  const renderTypePicker = () => {
+    return (
+      <Card padding={4}>
+        <Stack space={4}>
+          <div>
+            <Select
+              onChange={(e) => setNewComponentType(e.currentTarget.value)}
+              value={newComponentType}
+            >
+              <option value="">Select a component type</option>
+              {AVAILABLE_COMPONENT_TYPES.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </Select>
+          </div>
+          <Flex justify="flex-end" gap={2}>
+            <Button
+              text="Cancel"
+              tone="default"
+              onClick={() => handleDialogAction(CANCEL_ACTION)}
+            />
+            <Button
+              text="Add"
+              tone="primary"
+              disabled={!newComponentType}
+              onClick={handleAddComponent}
+            />
+          </Flex>
+        </Stack>
+      </Card>
+    )
+  }
+
   const renderEditItemForm = (item: any) => {
-    const childMarkers = markers?.filter((marker) => marker.path.length > 1)
     const itemIsEmpty = isEmpty(item)
     const actions = [
       itemIsEmpty ? CANCEL_ACTION : CLOSE_ACTION,
       !itemIsEmpty && !readOnly && DELETE_ACTION,
     ].filter(Boolean)
 
+    if (!item.component || item.component.length === 0) {
+      // No component selected yet. Show type picker
+      return (
+        <Dialog
+          header="Select Component Type"
+          onClose={handleEditStop}
+          id="grid-edit-dialog"
+          width={1}
+        >
+          {renderTypePicker()}
+        </Dialog>
+      )
+    }
+
+    // Already have a component, so show normal form
     return (
       <Dialog
         header={`Edit ${memberType?.title || memberType?.name || 'Item'}`}
@@ -101,33 +179,66 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
               onChange={handleFieldChange}
               path={[{ _key: item._key }]}
               focusPath={focusPath || []}
-              readOnly={readOnly || memberType?.readOnly} groups={[]} onFieldCollapse={function (fieldName: string): void {
-                throw new Error('Function not implemented.')
-              } } onFieldExpand={function (fieldName: string): void {
-                throw new Error('Function not implemented.')
-              } } onFieldSetCollapse={function (fieldSetName: string): void {
-                throw new Error('Function not implemented.')
-              } } onFieldSetExpand={function (fieldSetName: string): void {
-                throw new Error('Function not implemented.')
-              } } onFieldGroupSelect={function (groupName: string): void {
-                throw new Error('Function not implemented.')
-              } } onPathFocus={function (path: Path): void {
-                throw new Error('Function not implemented.')
-              } } onFieldOpen={function (fieldName: string): void {
-                throw new Error('Function not implemented.')
-              } } onFieldClose={function (fieldName: string): void {
-                throw new Error('Function not implemented.')
-              } } renderInput={function (inputProps: Omit<InputProps, 'renderDefault'>): React.ReactNode {
-                throw new Error('Function not implemented.')
-              } } renderField={function (fieldProps: Omit<FieldProps, 'renderDefault'>): React.ReactNode {
-                throw new Error('Function not implemented.')
-              } } renderItem={function (itemProps: Omit<ObjectItemProps, 'renderDefault'>): React.ReactNode {
-                throw new Error('Function not implemented.')
-              } } renderPreview={function (props: RenderPreviewCallbackProps): React.ReactNode {
-                throw new Error('Function not implemented.')
-              } } elementProps={{ id: '', onFocus: () => {}, onBlur: () => {}, ref: React.createRef(), 'aria-describedby': '' }} renderDefault={function (props: InputProps): React.JSX.Element {
-                throw new Error('Function not implemented.')
-              } } members={[]} id={''} level={0} presence={[]} validation={[]} changed={false}            />
+              readOnly={readOnly || memberType?.readOnly}
+              groups={[]}
+              onFieldCollapse={function (): void {
+                // no-op
+              }}
+              onFieldExpand={function (): void {
+                // no-op
+              }}
+              onFieldSetCollapse={function (): void {
+                // no-op
+              }}
+              onFieldSetExpand={function (): void {
+                // no-op
+              }}
+              onFieldGroupSelect={function (): void {
+                // no-op
+              }}
+              onPathFocus={function (): void {
+                // no-op
+              }}
+              onFieldOpen={function (): void {
+                // no-op
+              }}
+              onFieldClose={function (): void {
+                // no-op
+              }}
+              renderInput={function (): React.ReactNode {
+                // no-op
+                return null
+              }}
+              renderField={function (): React.ReactNode {
+                // no-op
+                return null
+              }}
+              renderItem={function (): React.ReactNode {
+                // no-op
+                return null
+              }}
+              renderPreview={function (): React.ReactNode {
+                // no-op
+                return null
+              }}
+              elementProps={{
+                id: '',
+                onFocus: () => {},
+                onBlur: () => {},
+                ref: React.createRef(),
+                'aria-describedby': '',
+              }}
+              renderDefault={function (props: InputProps): React.JSX.Element {
+                // We rely on the default object input
+                return <ObjectInput {...props} />
+              }}
+              members={[]}
+              id={''}
+              level={0}
+              presence={[]}
+              validation={[]}
+              changed={false}
+            />
             <Flex justify="flex-end" gap={2}>
               {actions.map((action: any) => (
                 <Button
@@ -144,7 +255,6 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     )
   }
 
-  // If for some reason memberType is not found, skip rendering Preview to avoid crashes
   if (!memberType) {
     return (
       <div
@@ -169,5 +279,4 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     </>
   )
 }
-
 export default RenderItemValue

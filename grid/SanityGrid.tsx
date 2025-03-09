@@ -27,15 +27,9 @@ function pathStartsWith(path: any[], prefix: any[]): boolean {
   return true
 }
 
-// We must register the plugin for GSAP
 gsap.registerPlugin(Draggable)
 
-/**
- * SanityGrid: Custom input component for an array of objects.
- * Updated to remove references to props that aren't provided by ArrayOfObjectsInputProps in V3.
- */
 export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySchemaType>) {
-  // For sanity v3, we do not have 'document', 'markers', 'onFocus', 'onBlur', or 'filterField' on props
   const {
     value = [],
     schemaType,
@@ -43,7 +37,6 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     readOnly,
   } = props
 
-  // Replace old fallback logic (using props.document) with a static fallback
   const colFallback = 6
   const rowFallback = 4
   const rows = rowFallback
@@ -64,6 +57,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       console.error('Sanity Grid Input could not find the dragged element.')
       return
     }
+
     const {rowHeight, columnWidth} = gridDetails
     const itemKey = closestElement.dataset.key
     const foundItem = (value || []).find((element: any) => element._key === itemKey)
@@ -81,12 +75,14 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       col: Math.round(diffs.x / columnWidth) + 1,
       row: Math.round(diffs.y / rowHeight) + 1,
     }
+
     const newItem = {...foundItem}
     if (!newItem.settings) newItem.settings = {}
     newItem.settings.posX = pos.col
     newItem.settings.posY = pos.row
 
     onChange(PatchEvent.from([set(newItem)]))
+
     gsap.set(closestElement, {
       transform: '',
       gridColumnStart: pos.col,
@@ -125,11 +121,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
   useEffect(() => {
     updateGridDetails()
     createDraggable()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  // We rely on the v3 approach for focusing/markers or skip them entirely.
-  // So we remove references to 'markers', 'focusPath', 'onFocus', 'onBlur', 'filterField' etc.
 
   const handleItemChange = (patchEvent: PatchEvent, item: any) => {
     const memberType = getMemberType(item, schemaType)
@@ -149,7 +141,10 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       console.error("Grid schema type is missing 'of' definition. Could not add item.")
       return
     }
-    const newValue = createProtoValue(schemaType.of[0])
+    const newValue = {
+      ...createProtoValue(schemaType.of[0]),
+      component: [],
+    }
     onChange(PatchEvent.from([setIfMissing([]), insert([newValue], 'after', [-1])]))
   }
 
@@ -191,7 +186,6 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     return (
       <ul ref={gridRef} className={styles.grid_field} style={gridStyles}>
         {value.map((item: any, i: number) => {
-          // no markers usage in v3 props
           const {width, height, posX, posY} = item.settings || {}
           return (
             <li
