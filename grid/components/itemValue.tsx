@@ -9,6 +9,7 @@ import {
   ObjectItemProps,
   Path,
   RenderPreviewCallbackProps,
+  set,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
