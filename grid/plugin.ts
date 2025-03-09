@@ -1,10 +1,6 @@
 import {definePlugin, defineType, defineField} from 'sanity'
 import SanityGrid from './SanityGrid'
 
-/**
- * We define an array type called 'gridArray' which references our 'griditem'
- * This separate array type ensures we have a valid 'of' definition for the custom input.
- */
 export const grid = definePlugin({
   name: 'local-grid-plugin',
   schema: {
@@ -42,29 +38,35 @@ export const grid = definePlugin({
         title: 'Grid Item',
         fields: [
           defineField({
-            name: 'username',
-            type: 'string',
-            title: 'Username',
-          }),
-          defineField({
-            name: 'userimg',
-            type: 'image',
-            title: 'Profile Photo',
+            name: 'component',
+            title: 'Component',
+            type: 'array',
+            of: [
+              {type: 'hero'},
+              {type: 'motto'},
+              {type: 'toggle'},
+              {type: 'textBlock'},
+            ],
+            validation: (Rule) => Rule.max(1),
           }),
           defineField({
             name: 'settings',
             type: 'gridItemSettings',
             title: 'Settings',
           }),
+          defineField({
+            name: 'sortOrder',
+            title: 'Sort Order',
+            type: 'number',
+          }),
         ],
         preview: {
           select: {
-            title: 'username',
-            media: 'userimg',
+            title: 'component.0.title',
+            subtitle: 'component.0.selectableVariant',
           },
         },
       }),
-      // This array type uses the custom input component "SanityGrid"
       defineType({
         name: 'gridArray',
         type: 'array',
