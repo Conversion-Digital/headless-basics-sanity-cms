@@ -15,7 +15,6 @@ import useEventListener from './utils/hooks/useEventListener'
 import {createProtoValue, randomKey, getMemberType} from './utils'
 import RenderItemValue from './components/itemValue'
 import styles from './component.module.css'
-import { any } from 'prop-types'
 
 function pathStartsWith(path: any[], prefix: any[]): boolean {
   if (prefix.length > path.length) return false
@@ -70,9 +69,11 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     const itemKey = closestElement.dataset.key
     const foundItem = (value || []).find((element: any) => element._key === itemKey)
     if (!foundItem) return
+
     const gridBounding = gridRef.current?.getBoundingClientRect()
     const elementBounding = closestElement.getBoundingClientRect()
     if (!gridBounding) return
+
     const diffs = {
       x: Math.round(elementBounding.left - gridBounding.left),
       y: Math.round(elementBounding.top - gridBounding.top),
@@ -81,11 +82,14 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       col: Math.round(diffs.x / columnWidth) + 1,
       row: Math.round(diffs.y / rowHeight) + 1,
     }
+
     const newItem = {...foundItem}
     if (!newItem.settings) newItem.settings = {}
     newItem.settings.posX = pos.col
     newItem.settings.posY = pos.row
+
     onChange(PatchEvent.from([set(newItem)]))
+
     gsap.set(closestElement, {
       transform: '',
       gridColumnStart: pos.col,
@@ -126,32 +130,39 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     createDraggable()
   }, [])
 
+  /**
+   * Instead of prefixAll({ _key: key }), we directly set the updatedItem object
+   * into the array by referencing the parent's array item with that _key.
+   * This avoids the "Expected field name to be a string" error.
+   */
   const handleItemChange = (patchEvent: PatchEvent, item: any) => {
-    let updatedItem = item
-    // If item is null or undefined, let's build a new one from patchEvent
-    const patchZero = patchEvent.patches[0] as any;
-    const componentx = patchZero.value.component[0];
-
-    // updatedItem._componenttype = componentx._type;
-    
-    if (!updatedItem) {
+    if (!item) {
       console.error("handleItemChange received no valid item, skipping update")
       return
     }
+    let updatedItem = item
 
-    const memberType = getMemberType(updatedItem, schemaType)
+    const patchZero = patchEvent.patches[0] as any;
+    const componentx = patchZero.value.component[0];
+
+    updatedItem._componenttype = componentx._type;
+
+    const memberType = getMemberType(item, schemaType)
     if (!memberType || memberType.readOnly) {
       return
     }
-    let key = updatedItem._key
+    let key = item._key
     if (!key) {
       key = randomKey(12)
-      updatedItem._key = key
+      item._key = key
     }
+
+    // Merge patchEvent changes into item
+    // const updatedItem = patchEvent.apply(item)
+
+    // Now set updatedItem in the array at the position matching _key
     onChange(
-      patchEvent
-        .prefixAll({ _key: key })
-        .prepend(updatedItem._key ? [] : [set(key, [{ _key: key }])])
+      PatchEvent.from(set(updatedItem, [{_key: updatedItem._key}]))
     )
   }
 
@@ -223,10 +234,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
                 value={item}
                 readOnly={readOnly}
                 onRemove={handleRemoveItem}
-                onChange={(patchEvent: PatchEvent) => {
-                  console.log("Item being passed to handleItemChange:", item);
-                  handleItemChange(patchEvent, item);
-                }}
+                onChange={(patchEvent: PatchEvent) => handleItemChange(patchEvent, item)}
               />
             </li>
           )

@@ -186,6 +186,8 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       },
     ]
     replaceItem(updatedItem)
+
+    handleDialogAction(CLOSE_ACTION)
   }
 
   const renderTypePicker = () => {
@@ -325,6 +327,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
         tabIndex={0}
         onClick={value._key && handleEditStart}
       >
+        {value?._componenttype}
         <Preview layout="default" value={value} schemaType={memberType} />
       </div>
       {isExpanded && renderEditItemForm(value)}

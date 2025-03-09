@@ -17,4 +17,4 @@
 - **Added**: `grid/Readme.txt` with an in-depth explanation of how the Sanity Grid, custom input component, and relevant schemas work.
 - **Improved**: The add/edit workflow in `SanityGrid.tsx` and `itemValue.tsx` to allow selecting a component type if none is set, or editing existing component fields for each grid item.
 - **Fixed**: Ensure `_key` is always present in newly added items and newly added components, preventing "Cannot read properties of undefined (reading '_key')" errors.
-- **Fixed**: `handleItemChange` logic now handles `null` items by constructing a new item from the patch event.
+- **Fixed**: Removed the usage of `prefixAll({ _key: key })` and replaced it with a direct `set()` approach in `handleItemChange`, resolving "Expected field name to be a string" patch errors.
