@@ -19,3 +19,4 @@
 - **Fixed**: Ensure `_key` is always present in newly added items and newly added components, preventing "Cannot read properties of undefined (reading '_key')" errors.
 - **Fixed**: Removed the usage of `prefixAll({ _key: key })` and replaced it with a direct `set()` approach in `handleItemChange`, resolving "Expected field name to be a string" patch errors.
 - **Changed**: Now, once `_componenttype` is set, the "Select Component Type" screen won't appear again in `itemValue.tsx`. Also removed forced `_componenttype` assignment in `SanityGrid.tsx`.
+- **Fixed TS Error**: Added the missing ObjectInputProps in `itemValue.tsx` and used `memberType` instead of `item._componenttype` for `schemaType`.

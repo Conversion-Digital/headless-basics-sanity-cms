@@ -4,16 +4,11 @@ import {
   PatchEvent,
   ObjectInput,
   FormPatch,
-  FieldProps,
-  InputProps,
-  ObjectItemProps,
-  Path,
-  RenderPreviewCallbackProps,
   set,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
-import { getMemberType } from '../utils'
+import { getMemberType, getComponentMemberType } from '../utils'
 import randomKey from '../utils/randomKey'
 
 interface ItemValueProps {
@@ -61,12 +56,8 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const {
     value,
     type,
-    markers,
     focusPath,
-    onFocus,
-    onBlur,
     readOnly,
-    filterField,
     onChange,
     onRemove,
   } = props
@@ -75,7 +66,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const [newComponentType, setNewComponentType] = useState<string>('')
 
   // Derive the relevant schema for the entire "griditem" object
-  const memberType = getMemberType(value, type)
+  const memberType = getComponentMemberType(value, type)
 
   const handleEditStart = () => {
     setIsExpanded(true)
@@ -102,8 +93,8 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
 
   const replaceItem = (updatedItem: any) => {
     if (!updatedItem) {
-      console.error("replaceItem was called with a null or undefined value.");
-      return;
+      console.error("replaceItem was called with a null or undefined value.")
+      return
     }
     const itemKey = updatedItem._key || randomKey()
     updatedItem._key = itemKey
@@ -123,7 +114,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
 
   const handleAddComponent = () => {
     if (!newComponentType) return
-    const updatedItem = {...value}
+    const updatedItem = { ...value }
     if (!updatedItem._key) {
       updatedItem._key = randomKey()
     }
@@ -136,45 +127,41 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
         _key: randomKey(),
       },
     ]
-    // Set the _componenttype so we won't show the select screen again
     updatedItem._componenttype = newComponentType
-
     replaceItem(updatedItem)
     handleDialogAction(CLOSE_ACTION)
   }
 
-  const renderTypePicker = () => {
-    return (
-      <Card padding={4}>
-        <Stack space={4}>
-          <div>
-            <Select
-              onChange={(e) => setNewComponentType(e.currentTarget.value)}
-              value={newComponentType}
-            >
-              <option value="">Select a component type</option>
-              {AVAILABLE_COMPONENT_TYPES.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </Select>
-          </div>
-          <Flex justify="flex-end" gap={2}>
-            <Button
-              text="Cancel"
-              tone="default"
-              onClick={() => handleDialogAction(CANCEL_ACTION)}
-            />
-            <Button
-              text="Add"
-              tone="primary"
-              disabled={!newComponentType}
-              onClick={handleAddComponent}
-            />
-          </Flex>
-        </Stack>
-      </Card>
-    )
-  }
+  const renderTypePicker = () => (
+    <Card padding={4}>
+      <Stack space={4}>
+        <div>
+          <Select
+            onChange={(e) => setNewComponentType(e.currentTarget.value)}
+            value={newComponentType}
+          >
+            <option value="">Select a component type</option>
+            {AVAILABLE_COMPONENT_TYPES.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </Select>
+        </div>
+        <Flex justify="flex-end" gap={2}>
+          <Button
+            text="Cancel"
+            tone="default"
+            onClick={() => handleDialogAction(CANCEL_ACTION)}
+          />
+          <Button
+            text="Add"
+            tone="primary"
+            disabled={!newComponentType}
+            onClick={handleAddComponent}
+          />
+        </Flex>
+      </Stack>
+    </Card>
+  )
 
   const renderEditItemForm = (item: any) => {
     const itemIsEmpty = isEmpty(item)
@@ -183,8 +170,6 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       !itemIsEmpty && !readOnly && DELETE_ACTION,
     ].filter(Boolean)
 
-    // If _componenttype is not set, show the type picker
-    // Otherwise, show the default object input
     if (!item?._componenttype) {
       return (
         <Dialog
@@ -198,6 +183,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       )
     }
 
+    // Use memberType for schemaType since item._componenttype is just a string
     return (
       <Dialog
         header={`Edit ${item?._componenttype}`}
@@ -209,11 +195,12 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
           <Stack space={4}>
             <ObjectInput
               value={itemIsEmpty ? undefined : item}
-              schemaType={item?._componenttype}
+              schemaType={memberType}
               onChange={handleFieldChange}
               path={[{ _key: item._key }]}
               focusPath={focusPath || []}
               readOnly={readOnly || memberType?.readOnly}
+              // Required fields
               groups={[]}
               onFieldCollapse={() => {}}
               onFieldExpand={() => {}}
@@ -234,12 +221,9 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
                 ref: React.createRef(),
                 'aria-describedby': '',
               }}
-              renderDefault={(props: InputProps): React.JSX.Element => {
-                // We rely on the default object input
-                return <ObjectInput {...props} />
-              }}
+              renderDefault={(props) => <ObjectInput {...props} />}
               members={[]}
-              id={''}
+              id=""
               level={0}
               presence={[]}
               validation={[]}
@@ -266,7 +250,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     return (
       <div
         className={styles.value_container}
-        style={{color: 'red', fontSize: '0.9rem', padding: '0.5rem'}}
+        style={{ color: 'red', fontSize: '0.9rem', padding: '0.5rem' }}
       >
         <strong>Cannot render item preview: unknown member type.</strong>
       </div>

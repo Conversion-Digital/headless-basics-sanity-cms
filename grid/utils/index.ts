@@ -26,4 +26,15 @@ export function getMemberType(value: any, parentType: any) {
   return parentType.of.find((memberType: any) => memberType.name === itemTypeName) || parentType.of[0]
 }
 
+export function resolveComponentTypeName(value: any) {
+  const jsType = resolveJSType(value)
+  return jsType === 'object' && '_componenttype' in value && value._componenttype ? value._componenttype : jsType
+}
+
+export function getComponentMemberType(value: any, parentType: any) {
+  const itemTypeName = resolveComponentTypeName(value)
+  const ofArray = parentType.type.of[0].type.fieldsets[0].field.type.of
+  return ofArray.find((memberType: any) => memberType.name === itemTypeName) || ofArray[0]
+}
+
 export const randomKey = randomKeyFn
