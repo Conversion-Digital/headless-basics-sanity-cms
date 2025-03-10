@@ -5,6 +5,7 @@ import {
   ObjectInput,
   FormPatch,
   set,
+  ObjectSchemaType,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
@@ -66,7 +67,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const [newComponentType, setNewComponentType] = useState<string>('')
 
   // Derive the relevant schema for the entire "griditem" object
-  const memberType = getComponentMemberType(value, type)
+  const memberType = getComponentMemberType(value, type) as ObjectSchemaType
 
   const handleEditStart = () => {
     setIsExpanded(true)
@@ -98,10 +99,12 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     }
     const itemKey = updatedItem._key || randomKey()
     updatedItem._key = itemKey
+
     onChange(
       PatchEvent.from(
         set(updatedItem, [{_key: itemKey}])
-      )
+      ),
+      updatedItem
     )
   }
 
@@ -115,6 +118,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const handleAddComponent = () => {
     if (!newComponentType) return
     const updatedItem = { ...value }
+
     if (!updatedItem._key) {
       updatedItem._key = randomKey()
     }
@@ -183,7 +187,6 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       )
     }
 
-    // Use memberType for schemaType since item._componenttype is just a string
     return (
       <Dialog
         header={`Edit ${item?._componenttype}`}
@@ -193,13 +196,14 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       >
         <Card padding={4}>
           <Stack space={4}>
+            Object INPUT :::
             <ObjectInput
               value={itemIsEmpty ? undefined : item}
               schemaType={memberType}
               onChange={handleFieldChange}
               path={[{ _key: item._key }]}
               focusPath={focusPath || []}
-              readOnly={readOnly || memberType?.readOnly}
+              readOnly={readOnly || (typeof memberType?.readOnly === 'boolean' ? memberType.readOnly : undefined)}
               // Required fields
               groups={[]}
               onFieldCollapse={() => {}}
@@ -221,7 +225,28 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
                 ref: React.createRef(),
                 'aria-describedby': '',
               }}
-              renderDefault={(props) => <ObjectInput {...props} />}
+              renderDefault={(props) => (
+                <ObjectInput 
+                  value={undefined}
+                  schemaType={memberType}
+                  onChange={handleFieldChange}
+                  members={[]}
+                  groups={[]}
+                  onFieldCollapse={() => {}}
+                  onFieldExpand={() => {}}
+                  onFieldSetCollapse={() => {}}
+                  onFieldSetExpand={() => {}}
+                  onFieldGroupSelect={() => {}}
+                  onPathFocus={() => {}}
+                  onFieldOpen={() => {}}
+                  onFieldClose={() => {}}
+                  renderInput={() => null}
+                  renderField={() => null}
+                  renderItem={() => null}
+                  renderPreview={() => null}
+                  renderDefault={() => null}
+                />
+              )}
               members={[]}
               id=""
               level={0}

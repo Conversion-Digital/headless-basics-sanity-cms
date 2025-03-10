@@ -20,3 +20,14 @@
 - **Fixed**: Removed the usage of `prefixAll({ _key: key })` and replaced it with a direct `set()` approach in `handleItemChange`, resolving "Expected field name to be a string" patch errors.
 - **Changed**: Now, once `_componenttype` is set, the "Select Component Type" screen won't appear again in `itemValue.tsx`. Also removed forced `_componenttype` assignment in `SanityGrid.tsx`.
 - **Fixed TS Error**: Added the missing ObjectInputProps in `itemValue.tsx` and used `memberType` instead of `item._componenttype` for `schemaType`.
+- **Updated**: itemValue.tsx to properly configure `ObjectInput` usage, removing extraneous properties.
+
+eslint.config.mjs
+global.d.ts
+package.json
+pageTreeConfig.ts
+README.md
+sanity-plugin-hotspot-array-main.zip:Zone.Identifier
+sanity.cli.ts
+sanity.config.ts
+tsconfig.json
