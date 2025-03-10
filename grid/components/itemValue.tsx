@@ -3,13 +3,12 @@ import {
   Preview,
   PatchEvent,
   ObjectInput,
-  FormPatch,
-  set,
   ObjectSchemaType,
+  set,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
-import { getMemberType, getComponentMemberType } from '../utils'
+import { getComponentMemberType } from '../utils'
 import randomKey from '../utils/randomKey'
 
 interface ItemValueProps {
@@ -24,16 +23,20 @@ interface ItemValueProps {
   onChange: (patchEvent: PatchEvent, value: any) => void
   onRemove: (value: any) => void
   level?: number
+  // new prop for passing in the correct members
+  members?: any[]
 }
 
 const CLOSE_ACTION = {
   name: 'close',
   title: 'Close',
 }
+
 const CANCEL_ACTION = {
   name: 'cancel',
   title: 'Cancel',
 }
+
 const DELETE_ACTION = {
   name: 'delete',
   title: 'Delete',
@@ -61,6 +64,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     readOnly,
     onChange,
     onRemove,
+    members = []
   } = props
 
   const [isExpanded, setIsExpanded] = useState(false)
@@ -99,7 +103,6 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     }
     const itemKey = updatedItem._key || randomKey()
     updatedItem._key = itemKey
-
     onChange(
       PatchEvent.from(
         set(updatedItem, [{_key: itemKey}])
@@ -108,17 +111,14 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     )
   }
 
-  const handleFieldChange = (patch: PatchEvent | FormPatch | FormPatch[]) => {
-    const nextItem = patch instanceof PatchEvent
-      ? patch.apply(value)
-      : PatchEvent.from(patch).apply(value)
+  const handleFieldChange = (patch: PatchEvent) => {
+    const nextItem = patch.apply(value)
     replaceItem(nextItem)
   }
 
   const handleAddComponent = () => {
     if (!newComponentType) return
     const updatedItem = { ...value }
-
     if (!updatedItem._key) {
       updatedItem._key = randomKey()
     }
@@ -196,64 +196,16 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       >
         <Card padding={4}>
           <Stack space={4}>
-            Object INPUT :::
             <ObjectInput
-              value={value}
+              value={item}
               schemaType={memberType}
               onChange={handleFieldChange}
               path={[{ _key: item._key }]}
               focusPath={focusPath || []}
-              members={[]}
-              readOnly={readOnly || (typeof memberType?.readOnly === 'boolean' ? memberType.readOnly : undefined)}
-              // Required fields
+              members={members}
               groups={[]}
-              onFieldCollapse={() => {}}
-              onFieldExpand={() => {}}
-              onFieldSetCollapse={() => {}}
-              onFieldSetExpand={() => {}}
-              onFieldGroupSelect={() => {}}
-              onPathFocus={() => {}}
-              onFieldOpen={() => {}}
-              onFieldClose={() => {}}
-              renderInput={() => null}
-              renderField={() => null}
-              renderItem={() => null}
-              renderPreview={() => null}
-              elementProps={{
-                id: '',
-                onFocus: () => {},
-                onBlur: () => {},
-                ref: React.createRef(),
-                'aria-describedby': '',
-              }}
-              renderDefault={(props) => (
-                <ObjectInput 
-                  value={undefined}
-                  schemaType={memberType}
-                  onChange={handleFieldChange}
-                  members={[]}
-                  groups={[]}
-                  onFieldCollapse={() => {}}
-                  onFieldExpand={() => {}}
-                  onFieldSetCollapse={() => {}}
-                  onFieldSetExpand={() => {}}
-                  onFieldGroupSelect={() => {}}
-                  onPathFocus={() => {}}
-                  onFieldOpen={() => {}}
-                  onFieldClose={() => {}}
-                  renderInput={() => null}
-                  renderField={() => null}
-                  renderItem={() => null}
-                  renderPreview={() => null}
-                  renderDefault={() => null}
-                />
-              )}
-              members={[]}
-              id=""
-              level={0}
-              presence={[]}
-              validation={[]}
-              changed={false}
+              readOnly={readOnly || (typeof memberType?.readOnly === 'boolean' ? memberType.readOnly : undefined)}
+              // We can rely on default form rendering
             />
             <Flex justify="flex-end" gap={2}>
               {actions.map((action: any) => (

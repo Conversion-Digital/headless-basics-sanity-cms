@@ -43,6 +43,9 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     schemaType,
     onChange,
     readOnly,
+    // added to retrieve members and focus path from the parent
+    members = [],
+    focusPath = []
   } = props
 
   const colFallback = 6
@@ -65,6 +68,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       console.error('Sanity Grid Input could not find the dragged element.')
       return
     }
+
     const {rowHeight, columnWidth} = gridDetails
     const itemKey = closestElement.dataset.key
     const foundItem = (value || []).find((element: any) => element._key === itemKey)
@@ -101,6 +105,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     const snap = (val: number, snapTo: number) => {
       return Math.round(val / snapTo) * snapTo
     }
+
     draggableRef.current = Draggable.create(`.${styles.grid_item}`, {
       bounds: gridRef.current,
       throwProps: true,
@@ -130,37 +135,29 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     createDraggable()
   }, [])
 
-  /**
-   * Instead of prefixAll({ _key: key }), we directly set the updatedItem object
-   * into the array by referencing the parent's array item with that _key.
-   * This avoids the "Expected field name to be a string" error.
-   */
   const handleItemChange = (patchEvent: PatchEvent, item: any) => {
     if (!item) {
       console.error("handleItemChange received no valid item, skipping update")
       return
     }
     let updatedItem = item
-
-    const patchZero = patchEvent.patches[0] as any;
-    const componentx = patchZero.value.component[0];
-
-    updatedItem._componenttype = componentx._type;
+    const patchZero = patchEvent.patches[0] as any
+    const componentx = patchZero?.value?.component?.[0]
+    if (componentx && componentx._type) {
+      updatedItem._componenttype = componentx._type
+    }
 
     const memberType = getMemberType(item, schemaType)
     if (!memberType || memberType.readOnly) {
       return
     }
+
     let key = item._key
     if (!key) {
       key = randomKey(12)
       item._key = key
     }
 
-    // Merge patchEvent changes into item
-    // const updatedItem = patchEvent.apply(item)
-
-    // Now set updatedItem in the array at the position matching _key
     onChange(
       PatchEvent.from(set(updatedItem, [{_key: updatedItem._key}]))
     )
@@ -206,6 +203,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     if (!value || !value.length) {
       return <p style={{color: '#666'}}>No grid items created yet</p>
     }
+
     const gridStyles: React.CSSProperties = {
       display: 'grid',
       gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -213,9 +211,16 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       position: 'relative',
       gap: '5px',
     }
+
     return (
       <ul ref={gridRef} className={styles.grid_field} style={gridStyles}>
         {value.map((item: any, i: number) => {
+          // find the member object that corresponds to this array item
+          const itemMember = members.find((m) => m.kind === 'item' && m.key === (item._key || ''))
+          // determine if we're focusing on this item
+          const isItemFocused = pathStartsWith(focusPath, [{_key: item._key}])
+          const childFocusPath = isItemFocused ? focusPath.slice(1) : []
+
           const {width, height, posX, posY} = item.settings || {}
           return (
             <li
@@ -235,6 +240,8 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
                 readOnly={readOnly}
                 onRemove={handleRemoveItem}
                 onChange={(patchEvent: PatchEvent) => handleItemChange(patchEvent, item)}
+                members={itemMember?.members || []}
+                focusPath={childFocusPath}
               />
             </li>
           )
