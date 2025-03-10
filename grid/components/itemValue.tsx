@@ -198,11 +198,12 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
           <Stack space={4}>
             Object INPUT :::
             <ObjectInput
-              value={itemIsEmpty ? undefined : item}
+              value={value}
               schemaType={memberType}
               onChange={handleFieldChange}
               path={[{ _key: item._key }]}
               focusPath={focusPath || []}
+              members={[]}
               readOnly={readOnly || (typeof memberType?.readOnly === 'boolean' ? memberType.readOnly : undefined)}
               // Required fields
               groups={[]}
