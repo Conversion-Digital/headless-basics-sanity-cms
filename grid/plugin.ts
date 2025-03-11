@@ -1,5 +1,6 @@
 import {definePlugin, defineType, defineField} from 'sanity'
 import SanityGrid from './SanityGrid'
+import gridLayoutSettings from '../schemaTypes/gridLayoutSettings'
 
 export const grid = definePlugin({
   name: 'local-grid-plugin',
@@ -88,23 +89,12 @@ export const grid = definePlugin({
           }),
           defineField({
             name: 'layoutSettings',
-            type: 'object',
-            title: 'Layout Settings',
-            fields: [
-              defineField({
-                name: 'columns',
-                type: 'number',
-                title: 'Columns',
-              }),
-              defineField({
-                name: 'rows',
-                type: 'number',
-                title: 'Rows',
-              }),
-            ],
+            type: 'gridLayoutSettings',
+            title: 'Layout Settings'
           }),
         ],
       }),
+      gridLayoutSettings,
     ],
   },
 })

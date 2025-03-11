@@ -61,7 +61,6 @@ export const pageFields = [
       { type: 'toggle' },
       { type: 'textBlock' },
       { type: 'motto' },
-      { type: 'accordion' },
       { type: 'gridBlock' }
     ],
   }),
