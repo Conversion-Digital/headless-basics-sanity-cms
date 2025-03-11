@@ -9,3 +9,6 @@
 
 ## 2025-03-10 (circular structure fix)
 - Now storing only minimal, non-circular field info in `_componentMembers` and removing it before patching to avoid JSON.stringify errors.
+
+## 2025-03-11
+- Removed GSAP references in `SanityGrid.tsx` and replaced with simpler HTML5 drag & drop + CSS transitions.
