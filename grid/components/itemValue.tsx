@@ -3,6 +3,7 @@ import {
   Preview,
   PatchEvent,
   ObjectSchemaType,
+  ObjectInput,
   set,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
@@ -10,8 +11,9 @@ import styles from './itemValue.module.css'
 import { getComponentMemberType } from '../utils'
 import randomKey from '../utils/randomKey'
 import { getMinimalSchemaFields } from '../getMinimalSchemaFields'
+// import { createPrepareFormState } from 'sanity/core/form/store/formState'
 import { createPrepareFormState } from '../../sanity-next/packages/sanity/src/core/form/store/formState'
-import { ObjectInput } from "../../sanity-next/packages/sanity/src/core/form/inputs/ObjectInput"
+// import { ObjectInput } from "../../sanity-next/packages/sanity/src/core/form/inputs/ObjectInput"
 import { useFormBuilder } from 'sanity'
 
 
@@ -258,22 +260,6 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
     console.log(`[itemValue][191]][${memberType?.name}] RenderItemValue members: ${JSON.stringify(members)}`)
 
     console.log(`[itemValue][193] RenderItemValue item: ${JSON.stringify(item)}`)
-
-    // let effectiveMembers = members;
-    // if (typeof(effectiveMembers) === 'undefined' || effectiveMembers.length === 0) {
-    //   effectiveMembers = getMinimalSchemaFields(type, memberType?.name)
-    // }
-
-    // console.log(`effectiveMembers: `, effectiveMembers)
-
-    // const effectiveMembers2 = effectiveMembers.map(({ validation, ...rest }) => ({
-    //   ...rest,
-    //   type: {
-    //     ...rest.type,
-    //     validation: undefined, // Remove validation at type level
-    //     type: rest.type?.type ? { ...rest.type.type, validation: undefined } : undefined // Remove validation at type.type level
-    //   }
-    // }));
 
     const fullyPopulatedMembers = formState.members || [];
 

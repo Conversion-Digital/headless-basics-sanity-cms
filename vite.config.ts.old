@@ -1,0 +1,19 @@
+import { defineConfig } from 'vite';
+import path from 'path';
+
+export default defineConfig({
+  resolve: {
+    preserveSymlinks: true, // Required for pnpm to resolve sources correctly
+    alias: {
+      'sanity': path.resolve(__dirname, './sanity-next/packages/sanity'),
+    },
+    dedupe: ['sanity']
+  },
+  build: {
+    sourcemap: true // Ensure source maps are generated
+  }
+});
+
+
+
+  
