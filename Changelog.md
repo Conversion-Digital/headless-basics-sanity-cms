@@ -21,6 +21,7 @@
 - **Changed**: Now, once `_componenttype` is set, the "Select Component Type" screen won't appear again in `itemValue.tsx`. Also removed forced `_componenttype` assignment in `SanityGrid.tsx`.
 - **Fixed TS Error**: Added the missing ObjectInputProps in `itemValue.tsx` and used `memberType` instead of `item._componenttype` for `schemaType`.
 - **Updated**: itemValue.tsx to properly configure `ObjectInput` usage, removing extraneous properties.
+- **Modified**: itemValue.tsx and SanityGrid.tsx to pass and receive the correct members array and focus path, ensuring fields are rendered appropriately.
 
 eslint.config.mjs
 global.d.ts

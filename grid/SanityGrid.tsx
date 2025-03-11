@@ -15,6 +15,7 @@ import useEventListener from './utils/hooks/useEventListener'
 import {createProtoValue, randomKey, getMemberType} from './utils'
 import RenderItemValue from './components/itemValue'
 import styles from './component.module.css'
+// import { getMinimalSchemaFields } from './getMinimalSchemaFields'
 
 function pathStartsWith(path: any[], prefix: any[]): boolean {
   if (prefix.length > path.length) return false
@@ -43,7 +44,6 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     schemaType,
     onChange,
     readOnly,
-    // added to retrieve members and focus path from the parent
     members = [],
     focusPath = []
   } = props
@@ -82,6 +82,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       x: Math.round(elementBounding.left - gridBounding.left),
       y: Math.round(elementBounding.top - gridBounding.top),
     }
+
     const pos = {
       col: Math.round(diffs.x / columnWidth) + 1,
       row: Math.round(diffs.y / rowHeight) + 1,
@@ -140,11 +141,17 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       console.error("handleItemChange received no valid item, skipping update")
       return
     }
+
     let updatedItem = item
+
+    // Extract the component type from the patch event
     const patchZero = patchEvent.patches[0] as any
     const componentx = patchZero?.value?.component?.[0]
     if (componentx && componentx._type) {
-      updatedItem._componenttype = componentx._type
+      updatedItem._componenttype = componentx._type;
+      updatedItem._componentkey = componentx._key;
+      // const minimalFields = getMinimalSchemaFields(schemaType, updatedItem._componenttype)
+      updatedItem._componentMembers = []
     }
 
     const memberType = getMemberType(item, schemaType)
@@ -158,9 +165,19 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       item._key = key
     }
 
+    /**
+     * Prevent storing circular references in the final doc
+     * by removing _componentMembers before applying patch
+     */
+    const tmpMembers = updatedItem._componentMembers
+    delete updatedItem._componentMembers
+
     onChange(
       PatchEvent.from(set(updatedItem, [{_key: updatedItem._key}]))
     )
+
+    // Reattach for local usage only, if needed
+    updatedItem._componentMembers = tmpMembers
   }
 
   const handleAddItem = () => {
@@ -212,16 +229,18 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
       gap: '5px',
     }
 
+
     return (
       <ul ref={gridRef} className={styles.grid_field} style={gridStyles}>
         {value.map((item: any, i: number) => {
-          // find the member object that corresponds to this array item
-          const itemMember = members.find((m) => m.kind === 'item' && m.key === (item._key || ''))
+          
+          console.log(`[SanityGrid][236] item?._componentMembers ${item?._componenttype} ::: ${item?._componentMembers}`)
           // determine if we're focusing on this item
           const isItemFocused = pathStartsWith(focusPath, [{_key: item._key}])
           const childFocusPath = isItemFocused ? focusPath.slice(1) : []
 
           const {width, height, posX, posY} = item.settings || {}
+
           return (
             <li
               className={styles.grid_item}
@@ -240,7 +259,7 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
                 readOnly={readOnly}
                 onRemove={handleRemoveItem}
                 onChange={(patchEvent: PatchEvent) => handleItemChange(patchEvent, item)}
-                members={itemMember?.members || []}
+                members={item?._componentMembers || []}
                 focusPath={childFocusPath}
               />
             </li>
