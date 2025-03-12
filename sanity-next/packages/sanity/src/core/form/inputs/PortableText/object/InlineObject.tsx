@@ -81,7 +81,7 @@ export const InlineObject = (props: InlineObjectProps): React.JSX.Element => {
     value,
   } = props
   const {Markers} = useFormBuilder().__internal.components
-  const editor = usePortableTextEditor()
+  const editor = useEditor()
   const markers = usePortableTextMarkers(path)
   const [divElement, setDivElement] = useState<HTMLDivElement | null>(null)
   const memberItem = usePortableTextMemberItem(pathToString(path))
