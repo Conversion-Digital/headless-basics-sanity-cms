@@ -48,11 +48,6 @@ export const pageFields = [
     type: 'pageMeta'
   }),
   defineField({
-    name: 'sanitygrid',
-    title: 'Sanity Grid',
-    type: 'sanitygrid'
-  }),
-  defineField({
     name: 'components',
     title: 'Components',
     type: 'array',

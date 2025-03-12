@@ -4,7 +4,6 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
 import { createPageTreeDocumentList } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from './pageTreeConfig'
-import { grid } from './grid/plugin'
 
 const structure = (S: StructureBuilder) =>
   S.list()
@@ -26,7 +25,7 @@ export default defineConfig({
   title: 'SanityShowcase',
   projectId: process.env.PROJECT_ID?.toLowerCase() || '',
   dataset: 'production',
-  plugins: [structureTool({ structure }), visionTool(), grid()],
+  plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
   },
