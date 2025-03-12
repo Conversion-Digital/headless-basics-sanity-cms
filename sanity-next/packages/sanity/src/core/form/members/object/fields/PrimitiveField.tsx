@@ -80,7 +80,10 @@ export function PrimitiveField(props: {
         setLocalValue(hasEmptyValue ? undefined : event.currentTarget.value)
       }
 
-      onChange(PatchEvent.from(hasEmptyValue ? unset() : set(inputValue)).prefixAll(member.name))
+      const fromV = hasEmptyValue ? unset() : set(inputValue);
+      const patchEvent = PatchEvent.from(fromV)
+      const prefixPatch = patchEvent.prefixAll(member.name);
+      onChange(prefixPatch.patches)
     },
     [member.name, member.field.schemaType, onChange],
   )

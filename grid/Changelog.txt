@@ -12,3 +12,10 @@
 
 ## 2025-03-11
 - Removed GSAP references in `SanityGrid.tsx` and replaced with simpler HTML5 drag & drop + CSS transitions.
+
+## 2025-03-12
+- Fixed nested patch events bug by removing nested PatchEvent usage in `itemValue.tsx` and letting the parent create the patch event in `SanityGrid.tsx`.
+
+## 2025-03-12 (rework patch events for Grid)
+- Changed `itemValue.tsx` to emit patch events instead of directly setting item values.
+- Updated `SanityGrid.tsx` to prefix child patch events with `[ {_key: item._key} ]`, mirroring the standard array approach.

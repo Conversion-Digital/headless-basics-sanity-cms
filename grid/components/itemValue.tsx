@@ -1,10 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import {
   Preview,
-  PatchEvent,
+  // PatchEvent,
   ObjectSchemaType,
-  ObjectInput,
-  set,
+  FormPatch,
+
+  // ObjectInput,
+  // set,
 } from 'sanity'
 import { Dialog, Card, Flex, Button, Stack, Select } from '@sanity/ui'
 import styles from './itemValue.module.css'
@@ -13,15 +15,18 @@ import randomKey from '../utils/randomKey'
 import { getMinimalSchemaFields } from '../getMinimalSchemaFields'
 // import { createPrepareFormState } from 'sanity/core/form/store/formState'
 import { createPrepareFormState } from '../../sanity-next/packages/sanity/src/core/form/store/formState'
-// import { ObjectInput } from "../../sanity-next/packages/sanity/src/core/form/inputs/ObjectInput"
-import { useFormBuilder } from 'sanity'
+import { ObjectInput } from "../../sanity-next/packages/sanity/src/core/form/inputs/ObjectInput"
+// import { useFormBuilder } from 'sanity'
+import { useFormBuilder } from '../../sanity-next/packages/sanity/src/core/form/useFormBuilder'
+import { PatchEvent } from '../../sanity-next/packages/sanity/src/core/form/patch/PatchEvent'
+import { set } from '../../sanity-next/packages/sanity/src/core/form/patch/patch'
 
 
 const prepareFormState = createPrepareFormState();
 
 interface ItemValueProps {
   value: any
-  type: any
+  parentType: any
   markers?: any[]
   focusPath?: any[]
   onFocus?: (path: any[]) => void
@@ -67,7 +72,7 @@ const AVAILABLE_COMPONENT_TYPES = [
 const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const {
     value,
-    type,
+    parentType,
     focusPath,
     readOnly,
     onChange,
@@ -79,7 +84,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   const [newComponentType, setNewComponentType] = useState<string>('')
 
   // Derive the relevant schema for the entire "griditem" object
-  const memberType = getComponentMemberType(value, type) as ObjectSchemaType
+  const memberType = getComponentMemberType(value, parentType) as ObjectSchemaType
 
   // Generate the form state
   const formState = useMemo(() => {
@@ -144,23 +149,24 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
   }
 
   const handleFieldChange = useCallback(
-    (patchEvent: PatchEvent) => {
-      // Apply the incoming patch to the item’s current value
-      let nextItem = patchEvent.apply(value) || {}
+   (patch: PatchEvent | FormPatch | FormPatch[]) => {
+      console.log(`[itemValue][151] handleFieldChange patchEvent: ${JSON.stringify(patch)}`)
+      // // Apply the incoming patch to the item’s current value
+      // let nextItem = patch.apply(value) || {}
 
       // Ensure nextItem has placeholders for *all* declared fields on `memberType`
-      const minimalFields = getMinimalSchemaFields(type, memberType?.name)
-      nextItem = ensureAllSchemaFields(nextItem, minimalFields)
+      // const minimalFields = getMinimalSchemaFields(parentType, memberType?.name)
+      // nextItem = ensureAllSchemaFields(nextItem, minimalFields)
 
-      // If no _key, generate one so it remains a stable array item
-      if (!nextItem._key) {
-        nextItem._key = randomKey()
-      }
+      // // If no _key, generate one so it remains a stable array item
+      // if (!nextItem._key) {
+      //   nextItem._key = randomKey()
+      // }
 
-      // Finally, call onChange with the updated item
-      onChange(PatchEvent.from(set(nextItem)), nextItem)
+      // // Finally, call onChange with the updated item
+      // onChange(PatchEvent.from(set(nextItem)), nextItem)
     },
-    [onChange, type, value, memberType]
+    [onChange, parentType, value, memberType]
   )
 
   const handleAddComponent = () => {
@@ -178,7 +184,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
         _key: randomKey(),
       },
     ]
-    updatedItem._componenttype = newComponentType
+    // updatedItem.component.type = newComponentType
     replaceItem(updatedItem)
     handleDialogAction(CLOSE_ACTION)
   }
@@ -244,7 +250,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       !itemIsEmpty && !readOnly && DELETE_ACTION,
     ].filter(Boolean)
 
-    if (!item?._componenttype) {
+    if (!item?.component?._type) {
       return (
         <Dialog
           header="Select Component Type"
@@ -257,9 +263,9 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       )
     }
 
-    console.log(`[itemValue][191]][${memberType?.name}] RenderItemValue members: ${JSON.stringify(members)}`)
+    // console.log(`[itemValue][191]][${memberType?.name}] RenderItemValue members: ${JSON.stringify(members)}`)
 
-    console.log(`[itemValue][193] RenderItemValue item: ${JSON.stringify(item)}`)
+    // console.log(`[itemValue][193] RenderItemValue item: ${JSON.stringify(item)}`)
 
     const fullyPopulatedMembers = formState.members || [];
 
@@ -276,23 +282,25 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
       };
     };
 
-    console.log(`effectiveMembers: ${JSON.stringify(fullyPopulatedMembers, getCircularReplacer())}`, fullyPopulatedMembers);
+    // console.log(`effectiveMembers: ${JSON.stringify(fullyPopulatedMembers, getCircularReplacer())}`, fullyPopulatedMembers);
 
     const formBuilder = useFormBuilder()
+    const thisComponentType = item?.component?._type;
     return (
       <Dialog
-        header={`Edit ${item?._componenttype}`}
+        header={`Edit ${thisComponentType}`}
         onClose={handleEditStop}
         id="grid-edit-dialog"
         width={1}
       >
         <Card padding={4}>
           <Stack space={4}>
-            Uknown Fields {getRenderedUnknownFields({"_key" : item?._componentkey, "_type" : item?._componenttype})} :::
+            Uknown Fields {getRenderedUnknownFields({"_key" : item?._componentkey, "_type" : thisComponentType})} :::
             <ObjectInput
-              value={{"_key" : item?._componentkey, "_type" : item?._componenttype}}
+              value={{"_key" : item?._componentkey, "_type" : thisComponentType}}
               schemaType={memberType}
-              onChange={handleFieldChange}
+              id={item?._componentkey}
+              onChange={(patchEvent: PatchEvent | FormPatch | FormPatch[]) => handleFieldChange(patchEvent)}
               path={[{ _key: item._componentkey }]}
               members={fullyPopulatedMembers}
               groups={[]}
@@ -363,7 +371,7 @@ const RenderItemValue: React.FC<ItemValueProps> = (props) => {
         tabIndex={0}
         onClick={value._key && handleEditStart}
       >
-        {value?._componenttype}
+        {value?.component._type ? value?.component._type : 'Empty'}
         <Preview layout="default" value={value} schemaType={memberType} />
       </div>
       {isExpanded && renderEditItemForm(value)}

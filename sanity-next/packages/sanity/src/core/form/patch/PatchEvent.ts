@@ -32,6 +32,25 @@ export class PatchEvent {
   }
 
   prefixAll(segment: PathSegment): PatchEvent {
-    return PatchEvent.from(this.patches.map((patch) => prefixPath(patch, segment)))
+    const result = PatchEvent.from(this.patches.map((patch) => prefixPath(patch, segment)))
+    return result;
   }
+
+  // prefixAll(segment: PathSegment): PatchEvent {
+  //   console.debug("prefixAll called with segment:", segment);
+  
+  //   const prefixedPatches = this.patches.map((patch, index) => {
+  //     console.debug(`Processing patch at index ${index}:`, patch);
+  //     const prefixedPatch = prefixPath(patch, segment);
+  //     console.debug(`Prefixed patch at index ${index}:`, prefixedPatch);
+  //     return prefixedPatch;
+  //   });
+  
+  //   console.debug("All prefixed patches:", prefixedPatches);
+  
+  //   const patchEvent = PatchEvent.from(prefixedPatches);
+  //   console.debug("Created PatchEvent:", patchEvent);
+  
+  //   return patchEvent?.patches[0];
+  // }
 }

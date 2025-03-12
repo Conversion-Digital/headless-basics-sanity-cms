@@ -50,7 +50,7 @@ export const ObjectInput = memo(function ObjectInput(props: ObjectInputProps) {
   // Object inputs should only be focusable if they are not the root object input
   // This includes if they are in the root of a array block
   const isFocusable = useMemo(() => {
-    return id !== 'root' && !(path.length > 0 && isKeySegment(last(path)!))
+    return id !== 'root' && (path.length > 0 && isKeySegment(last(path)))
   }, [id, path])
 
   const renderedUnknownFields = useMemo(() => {

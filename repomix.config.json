@@ -12,7 +12,16 @@
         "instructionFilePath": "repomix-base.prompt"
     },
     "include": [
-        "**/*"
+        "./grid",
+        "./schemaTypes",
+        "ChangeLog.md",
+        "LICENSE",
+        "README.md",
+        "package.json",
+        "tsconfig.json",
+        "global.d.ts",
+        "pageTreeConfig.ts",
+        "sanity-next/packages/sanity/src/core/form/inputs/arrays"
     ],
     "ignore": {
         "useGitignore": true,
@@ -34,7 +43,9 @@
             "./**/repomix.config.json",
             ".sanity",
             "packages/headless-basics-starter-site/.prettierrc.json",
-            "./**/tsconfig.tsbuildinfo"
+            "./**/tsconfig.tsbuildinfo",
+            "./sanity-plugin-hotspot-array-main",
+            "./cc"
         ]
     },
     "security": {

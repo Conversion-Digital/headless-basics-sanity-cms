@@ -116,29 +116,35 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
     }
     let updatedItem = item
     const patchZero = patchEvent.patches[0] as any
-    const componentx = patchZero?.value?.component?.[0]
-    if (componentx && componentx._type) {
-      updatedItem._componenttype = componentx._type
-      updatedItem._componentkey = componentx._key
-      updatedItem._componentMembers = []
-    }
+    const componentx = patchZero?.value?.component?.[0];
+    // if (componentx && componentx._type) {
+    //   updatedItem._componenttype = componentx._type
+    //   updatedItem._componentkey = componentx._key
+    // if(!updatedItem._componentMembers) {
+    //   updatedItem._componentMembers = []
+    // }
+    // updatedItem._componentMembers.push(componentx);
+    // }
+    updatedItem.component = componentx;
+    // updatedItem._key = item._key
+
     const memberType = getMemberType(item, schemaType)
     if (!memberType || memberType.readOnly) {
       return
     }
-    let key = item._key
-    if (!key) {
-      key = randomKey(12)
-      item._key = key
-    }
-    const tmpMembers = updatedItem._componentMembers
-    delete updatedItem._componentMembers
+    // let key = item._key
+    // if (!key) {
+    //   key = randomKey(12)
+    //   item._key = key
+    // }
+    // const tmpMembers = updatedItem._componentMembers
+    // delete updatedItem._componentMembers
 
     onChange(
       PatchEvent.from(set(updatedItem, [{_key: updatedItem._key}]))
     )
 
-    updatedItem._componentMembers = tmpMembers
+    // updatedItem._componentMembers = tmpMembers
   }
 
   const handleAddItem = () => {
@@ -215,12 +221,12 @@ export default function SanityGrid(props: ArrayOfObjectsInputProps<any, ArraySch
               }}
             >
               <RenderItemValue
-                type={schemaType}
+                parentType={schemaType}
                 value={item}
                 readOnly={readOnly}
                 onRemove={handleRemoveItem}
                 onChange={(patchEvent: PatchEvent) => handleItemChange(patchEvent, item)}
-                members={item?._componentMembers || []}
+                members={[]}
                 focusPath={childFocusPath}
               />
             </li>

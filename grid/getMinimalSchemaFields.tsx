@@ -7,9 +7,9 @@ import {Schema} from '@sanity/schema'
  * Instead of returning the entire schema object, it returns a short array with name/title/typeName.
  */
 export function getMinimalSchemaFields(
-  schemaType: ArraySchemaType,
+  parentType: ArraySchemaType,
   componentTypeName: string): { name: string; title?: string; typeName?: string; }[] {
-  const gridItemSchema = schemaType?.of?.[0];
+  const gridItemSchema = parentType?.of?.[0];
   if (!gridItemSchema?.fields) {
     console.log("getMinimalSchemaFields: No fields found in schema");
     return [];

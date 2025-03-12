@@ -63,6 +63,12 @@ export const pageFields = [
       { type: 'motto' },
       { type: 'gridBlock' }
     ],
+    options: {
+      layout: 'grid',
+      insertMenu: {
+        showIcons: true,
+      }
+    }
   }),
 ]
 

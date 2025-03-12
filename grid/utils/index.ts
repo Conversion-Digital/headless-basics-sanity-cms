@@ -28,7 +28,7 @@ export function getMemberType(value: any, parentType: any) {
 
 export function resolveComponentTypeName(value: any) {
   const jsType = resolveJSType(value)
-  return jsType === 'object' && '_componenttype' in value && value._componenttype ? value._componenttype : jsType
+  return jsType === 'object' && 'component' in value && value?.component._type ? value?.component._type : jsType
 }
 
 export function getComponentMemberType(value: any, parentType: any) {
