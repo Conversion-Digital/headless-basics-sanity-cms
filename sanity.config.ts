@@ -17,6 +17,23 @@ const structure = (S: StructureBuilder) =>
             extendDocumentList: (builder) =>
               builder.id('pages').title('Pages').apiVersion(pageTreeConfig.apiVersion),
           })
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Components')
+        .child(
+          S.list()
+            .title('Components')
+            .items([
+              S.documentTypeListItem('hero'),
+              S.documentTypeListItem('heroButton'),
+              S.documentTypeListItem('textBlock'),
+              S.documentTypeListItem('seo'),
+              S.documentTypeListItem('pageMeta'),
+              S.documentTypeListItem('toggle'),
+              S.documentTypeListItem('motto'),
+              S.documentTypeListItem('gridBlock'),
+            ])
         )
     ])
 
@@ -28,6 +45,19 @@ export default defineConfig({
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
+  },
+  document: {
+    newDocumentOptions: (prev, {currentUser, creationContext}) => {
+      const componentTemplates = [
+        {
+          templateId: 'heroDocument',
+          title: 'Hero Document',
+          description: 'Create a new Hero component',
+          icon: () => '🖼️'
+        }
+      ]
+      return [...prev, ...componentTemplates]
+    }
   },
   beta: {
     create: {
