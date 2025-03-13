@@ -5,7 +5,6 @@ import { schemaTypes } from './schemaTypes'
 import { createPageTreeDocumentList } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from './pageTreeConfig'
 import { AddCircleIcon } from '@sanity/icons'
-import { projectId } from './env'
 
 const structure = (S: StructureBuilder) =>
   S.list()
@@ -123,10 +122,12 @@ const structure = (S: StructureBuilder) =>
         )
     ])
 
+console.log("[sanity.config.ts][125] ", import.meta.env);
+console.log("[sanity.config.ts][129] Sanity Project ID  :", import.meta.env.SANITY_STUDIO_PROJECT_ID); 
 export default defineConfig({
   name: 'default',
   title: 'SanityShowcase',
-  projectId: process.env.PROJECT_ID?.toLowerCase() || projectId,
+  projectId: (import.meta.env.SANITY_STUDIO_PROJECT_ID as string).toLowerCase(),
   dataset: 'production',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
