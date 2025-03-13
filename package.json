@@ -1,7 +1,7 @@
 {
   "name": "@conversiondigital/headless-basics-sanityshowcase",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.5",
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
@@ -154,7 +154,7 @@
     "valibot": "0.31.1",
     "vite": "^6.2.1",
     "yargs": "^17.3.0",
-    "sanity": "^3.78.1"
+    "sanity": "^3.79.0"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.1",
