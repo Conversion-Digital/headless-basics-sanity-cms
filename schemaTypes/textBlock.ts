@@ -29,5 +29,12 @@ export default defineType({
       title: 'Text',
       type: 'text',
     }),
+    defineField({
+      name: 'globalComponentSource',
+      title: 'Global Component Source',
+      type: 'reference',
+      to: [{type: 'textBlock'}],
+      description: 'Select a component grid that is a global document.'
+    })
   ],
 })

@@ -44,6 +44,13 @@ export default defineType({
       name: 'sortOrder',
       title: 'Sort Order',
       type: 'number'
+    }),
+    defineField({
+      name: 'globalComponentSource',
+      title: 'Global Component Source',
+      type: 'reference',
+      to: [{type: 'gridBlock'}],
+      description: 'Select a component grid that is a global document.'
     })
   ],
   preview: {

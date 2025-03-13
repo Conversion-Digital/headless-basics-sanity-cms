@@ -48,15 +48,8 @@ export default defineConfig({
   },
   document: {
     newDocumentOptions: (prev, {currentUser, creationContext}) => {
-      const componentTemplates = [
-        {
-          templateId: 'heroDocument',
-          title: 'Hero Document',
-          description: 'Create a new Hero component',
-          icon: () => '🖼️'
-        }
-      ]
-      return [...prev, ...componentTemplates]
+
+      return prev;
     }
   },
   beta: {
