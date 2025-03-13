@@ -5,7 +5,7 @@ import { schemaTypes } from './schemaTypes'
 import { createPageTreeDocumentList } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from './pageTreeConfig'
 import { AddCircleIcon } from '@sanity/icons'
-import { footerStructure } from '@conversiondigital/headless-basics-components/src/theme/default/components/footer/sanity-schema'
+import { projectId } from './env'
 
 const structure = (S: StructureBuilder) =>
   S.list()
@@ -126,7 +126,7 @@ const structure = (S: StructureBuilder) =>
 export default defineConfig({
   name: 'default',
   title: 'SanityShowcase',
-  projectId: process.env.PROJECT_ID?.toLowerCase() || '',
+  projectId: process.env.PROJECT_ID?.toLowerCase() || projectId,
   dataset: 'production',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
