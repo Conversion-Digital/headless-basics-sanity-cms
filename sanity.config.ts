@@ -4,7 +4,8 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
 import { createPageTreeDocumentList } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from './pageTreeConfig'
-import { AddCircleIcon } from '@sanity/icons'  // Added import for add button icon
+import { AddCircleIcon } from '@sanity/icons'
+import { footerStructure } from '@conversiondigital/headless-basics-components/src/theme/default/components/footer/sanity-schema'
 
 const structure = (S: StructureBuilder) =>
   S.list()
@@ -108,6 +109,16 @@ const structure = (S: StructureBuilder) =>
                         ),
                     ])
                 )
+            ])
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Structure')
+        .child(
+          S.list()
+            .title('Structure')
+            .items([
+              S.documentTypeListItem('footerStructure')
             ])
         )
     ])
