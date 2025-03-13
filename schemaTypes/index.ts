@@ -1,8 +1,8 @@
 import homepage from './homepage'
 import {defineType} from 'sanity'
 import page from './page'
-import hero, {heroDocument} from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
-import motto from '@conversiondigital/headless-basics-components/src/theme/default/components/motto/sanity-schema'
+import hero, {heroComponentGlobal} from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
+import motto, {mottoComponentGlobal} from '@conversiondigital/headless-basics-components/src/theme/default/components/motto/sanity-schema'
 import toggle from '@conversiondigital/headless-basics-components/src/theme/default/components/toggle/sanity-schema'
 import heroButton from './heroButton'
 import textBlock from './textBlock'
@@ -20,6 +20,5 @@ export const schemaTypes = [
   pageMeta,
   toggle,
   motto,
-  gridBlock,
-  heroDocument
+  gridBlock
 ]
