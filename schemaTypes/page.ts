@@ -56,7 +56,8 @@ export const pageFields = [
       { type: 'toggle' },
       { type: 'textBlock' },
       { type: 'motto' },
-      { type: 'gridBlock' }
+      { type: 'gridBlock' },
+      { type: 'ourcompany' }
     ],
   }),
 ]
