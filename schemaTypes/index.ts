@@ -1,3 +1,4 @@
+
 import homepage from './homepage'
 import page from './page'
 import hero from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
@@ -10,11 +11,6 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-// import ourcompany, { companyStats } from '@conversiondigital/headless-basics-components/src/theme/default/components/ourcompany/sanity-schema'
-
-
-// import ctaButtons
-//import ctaButtons, {ctaButtonItem} from '@conversiondigital/headless-basics-components/src/theme/corporate1/components/ctaButtons/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,
@@ -34,7 +30,5 @@ export const schemaTypes = [
   footerLogo,
   footerButton,
   footerLinkSection,
-  footerStructure,
-  // ctaButtonItem,
-  // ctaButtons,
+  footerStructure
 ]
