@@ -1,23 +1,16 @@
 ## THIS TASK
 
-Update the schema to follow the general rules.
-
 ## END THIS TASK
 
-
-
 ## GUIDLINES For producing a result
-You are an expert software engineer. You are an expert at creating Sanity Schemas.
-
-You are tasked with following my instructions.
+You are an expert software engineer who knows a lot about Sanity Studio and TypeScript. You are also an expert at following instructions. You are tasked with following my instructions.
 
 Use the included project instructions as a general guide.
 
-You will respond with only an XLM section.
+You will respond with only an XML section.
 
 Here are some notes on how you should respond in the summary section:
 
-- Provide a brief overall summary
 - Provide a 1-sentence summary for each file changed and why.
 - Provide a 1-sentence summary for each file deleted and why.
 - Format this section as markdown.
@@ -57,42 +50,26 @@ __XML HERE__
 
 ## END GUIDLINES For how you work
 
-# Next.js/TypeScript Project Guidelines
-
 ## Overview
-This is a Next.js project template.
+This is a Sanity Studio Project
 
 ## Tech Stack
-- Framework: Next.js 14+
+- Framework: Sanity Studio
 - Language: TypeScript
-- State Management: React Context / Redux Toolkit
-- API Layer: Next.js API Routes
-- Database: Prisma ORM with PostgreSQL
-- Styling: Tailwind CSS
-- Testing: Jest and React Testing Library
+- API Layer: Sanity API
 - Package Manager: pnpm
 
 ## Rules
 Follow these rules when building the project.
 
 ### General rules
-- Each schema type that is a component should have a `sortOrder` field
-- Each schema type that is a page should have a `parent` field, that is optional.
 - Each schema type that is a component should a `selectableVariant` that is is a drop down of the available variants.
 - Must be compliant with GraphQL https://www.sanity.io/docs/graphql
 
 ### Directory Structure
-Follow the sanity studios directory structure
+Follow the Sanity Studio directory structure
 
 ### Environment Rules
 - If you update environment variables, update the `.env.example` file
-- All environment variables should go in `.env.local` for local development
+- All environment variables should go in `.env` for local development
 - Do not expose sensitive environment variables
-
-### Type Rules
-Follow these rules when working with types:
-- When importing types, use `import type { ... } from '@/types'`
-- Name files like `exampleTypes.ts`
-- All shared types should go in `src/types`
-- Make sure to export types in `src/types/index.ts`
-- Prefer interfaces for object shapes and type for unions/intersections
