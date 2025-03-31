@@ -57,11 +57,7 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-<<<<<<< HEAD
-      { type: 'carousel' },
-=======
       { type: 'ctabutton' }
->>>>>>> 5fcc18d (sanity setup)
     ],
   }),
 ]
@@ -79,9 +75,4 @@ const _pageType = defineType({
   },
 })
 
-<<<<<<< HEAD
 export default definePageType(_pageType, pageTreeConfig)
-
-=======
-export default definePageType(_pageType, pageTreeConfig)
->>>>>>> 5fcc18d (sanity setup)
