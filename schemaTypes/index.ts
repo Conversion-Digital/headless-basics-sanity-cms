@@ -33,4 +33,3 @@ export const schemaTypes = [
   footerLinkSection,
   footerStructure,
   carousel
-]

@@ -1,4 +1,6 @@
+
 import {defineField, defineType} from 'sanity'
+
 export default defineType({
   name: 'textBlock',
   title: 'Text Block',
@@ -13,6 +15,11 @@ export default defineType({
           { title: 'Default', value: 'default' }
         ]
       }
+    }),
+    defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number'
     }),
     defineField({
       name: 'title',
@@ -38,3 +45,4 @@ export default defineType({
     })
   ],
 })
+      

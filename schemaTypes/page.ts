@@ -76,3 +76,4 @@ const _pageType = defineType({
 })
 
 export default definePageType(_pageType, pageTreeConfig)
+

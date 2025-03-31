@@ -122,7 +122,6 @@ const structure = (S: StructureBuilder) =>
         )
     ])
 
-console.log("[sanity.config.ts][125] ", import.meta.env);
 console.log("[sanity.config.ts][129] Sanity Project ID  :", import.meta.env.SANITY_STUDIO_PROJECT_ID); 
 export default defineConfig({
   name: 'default',
