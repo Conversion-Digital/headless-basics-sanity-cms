@@ -1,3 +1,4 @@
+
 import { defineField, defineType } from 'sanity'
 import { definePageType } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from '../pageTreeConfig'
@@ -58,6 +59,8 @@ export const pageFields = [
       { type: 'motto' },
       { type: 'gridBlock' },
       { type: 'carousel' },
+      // add frame469
+      { type: 'frame469' }
     ],
   }),
 ]
@@ -76,4 +79,3 @@ const _pageType = defineType({
 })
 
 export default definePageType(_pageType, pageTreeConfig)
-
