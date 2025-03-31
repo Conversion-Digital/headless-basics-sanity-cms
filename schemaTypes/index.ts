@@ -12,6 +12,11 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
+// import ourcompany, { companyStats } from '@conversiondigital/headless-basics-components/src/theme/default/components/ourcompany/sanity-schema'
+
+
+import ctaButtons from '@conversiondigital/headless-basics-components/src/theme/natloans/components/ctabutton/sanity-schema'
+import ctaButtonItem from '@conversiondigital/headless-basics-components/src/theme/natloans/components/ctabutton/sanity-schema/ctaButtonItem'
 
 export const schemaTypes = [
   targetedLink,
@@ -32,5 +37,6 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  carousel
+  ctaButtonItem,
+  ctaButtons,
 ]
