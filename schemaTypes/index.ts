@@ -13,8 +13,6 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-// Import the new frame469 schema from corporate1:
-import frame469 from '@conversiondigital/headless-basics-components/src/theme/corporate1/components/frame469/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,

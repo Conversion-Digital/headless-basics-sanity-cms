@@ -58,9 +58,7 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'carousel' },
-      // add frame469
-      { type: 'frame469' }
+      { type: 'carousel' }
     ],
   }),
 ]
