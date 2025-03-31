@@ -16,7 +16,7 @@ import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondi
 
 
 import ctaButtons from '@conversiondigital/headless-basics-components/src/theme/natloans/components/ctabutton/sanity-schema'
-import ctaButtonItem from '@conversiondigital/headless-basics-components/src/theme/natloans/components/ctabutton/sanity-schema/ctaButtonItem'
+
 
 export const schemaTypes = [
   targetedLink,
@@ -37,6 +37,5 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  ctaButtonItem,
   ctaButtons,
 ]
