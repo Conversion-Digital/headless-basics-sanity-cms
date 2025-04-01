@@ -58,7 +58,8 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'carousel' }
+      { type: 'carousel' },
+      { type: 'frame469' } /* ADDING FRAME469 */
     ],
   }),
 ]
@@ -75,5 +76,4 @@ const _pageType = defineType({
     },
   },
 })
-
 export default definePageType(_pageType, pageTreeConfig)
