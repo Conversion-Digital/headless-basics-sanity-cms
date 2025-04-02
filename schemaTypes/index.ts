@@ -1,6 +1,6 @@
 
 import homepage from './homepage'
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 import page from './page'
 import hero from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
 import carousel from '@conversiondigital/headless-basics-components/src/theme/default/components/carousel/sanity-schema'
@@ -13,6 +13,7 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
+import frame469 from '@conversiondigital/headless-basics-components/src/theme/corporate1/components/frame469/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,
@@ -33,5 +34,6 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  carousel
-]
+  carousel,
+  frame469
+];
