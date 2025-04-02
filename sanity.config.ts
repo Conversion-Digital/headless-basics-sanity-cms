@@ -123,7 +123,7 @@ const structure = (S: StructureBuilder) =>
     ])
 
 console.log("[sanity.config.ts][129] Sanity Project ID  :", import.meta.env.SANITY_STUDIO_PROJECT_ID); 
-export default defineConfig({
+const sanityConfig = defineConfig({
   name: 'default',
   title: 'SanityShowcase',
   projectId: (import.meta.env.SANITY_STUDIO_PROJECT_ID as string).toLowerCase(),
@@ -142,4 +142,6 @@ export default defineConfig({
       fallbackStudioOrigin: "http://localhost:3333"
     }
   }
-})
+});
+
+export default sanityConfig

@@ -20,8 +20,7 @@ export default defineType({
         { type: 'hero' },
         { type: 'toggle' },
         { type: 'textBlock' },
-        { type: 'motto' },
-        { type: 'gridBlock' }
+        { type: 'motto' }
       ],
       options: {
         layout: 'grid',
