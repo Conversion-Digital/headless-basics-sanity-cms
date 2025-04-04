@@ -13,8 +13,10 @@ import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
 
-// add our new import
+// add herobanner from the conversion theme
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
+
+import siteHeader from '@conversiondigital/headless-basics-components/src/theme/conversion/structures/site-header'
 
 export const schemaTypes = [
   targetedLink,
@@ -36,6 +38,7 @@ export const schemaTypes = [
   footerLinkSection,
   footerStructure,
   carousel,
-  // Add herobanner
-  herobanner
+  // herobanner
+  herobanner,
+  siteHeader
 ]

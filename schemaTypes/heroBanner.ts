@@ -23,6 +23,24 @@ export default defineType({
       type: 'image',
       validation: (Rule) => Rule.required()
     }),
-    // Add other fields as needed
+    defineField({
+      name: 'button',
+      title: 'Button',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'label',
+          title: 'Label',
+          type: 'string',
+          validation: (Rule) => Rule.required()
+        }),
+        defineField({
+          name: 'link',
+          title: 'Link',
+          type: 'url',
+          validation: (Rule) => Rule.required()
+        })
+      ]
+    })
   ]
 }) 
