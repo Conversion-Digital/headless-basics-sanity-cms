@@ -58,7 +58,8 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'carousel' }
+      { type: 'carousel' },
+      { type: 'herobanner' }
     ],
   }),
 ]
