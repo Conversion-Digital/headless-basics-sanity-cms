@@ -126,8 +126,9 @@ console.log("[sanity.config.ts][129] Sanity Project ID  :", import.meta.env.SANI
 const sanityConfig = defineConfig({
   name: 'default',
   title: 'SanityShowcase',
-  projectId: (import.meta.env.SANITY_STUDIO_PROJECT_ID as string).toLowerCase(),
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
   dataset: 'production',
+  apiVersion: '2024-02-19',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
