@@ -16,8 +16,6 @@ import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondi
 // add herobanner from the conversion theme
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
 
-import siteHeader from '@conversiondigital/headless-basics-components/src/theme/conversion/structures/site-header'
-
 export const schemaTypes = [
   targetedLink,
   internalUrl,
@@ -38,7 +36,5 @@ export const schemaTypes = [
   footerLinkSection,
   footerStructure,
   carousel,
-  // herobanner
-  herobanner,
-  siteHeader
+  herobanner
 ]
