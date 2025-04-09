@@ -8,6 +8,7 @@ import motto from '@conversiondigital/headless-basics-components/src/theme/defau
 import { footerLogo, footerButton, footerLinkSection, footerStructure } from '@conversiondigital/headless-basics-components/src/theme/default/components/footer/sanity-schema'
 import toggle from '@conversiondigital/headless-basics-components/src/theme/default/components/toggle/sanity-schema'
 import heroButton from './heroButton'
+import sideNavIndicator, { gridContent } from '@conversiondigital/headless-basics-components/src/theme/default/components/SideNavIndicator/sanity-schema'
 import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
@@ -33,5 +34,7 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  carousel
+  carousel,
+  sideNavIndicator,
+  gridContent,
 ]
