@@ -35,5 +35,6 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  carousel
+  carousel,
+  herobanner
 ];
