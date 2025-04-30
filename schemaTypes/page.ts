@@ -59,7 +59,8 @@ export const pageFields = [
       { type: 'gridBlock' },
       { type: 'carousel' },
       { type: 'herobanner' },
-      { type: 'cdfooter' }
+      { type: 'cdfooter' },
+      {type:  'cdnav' }
     ],
   }),
 ]
