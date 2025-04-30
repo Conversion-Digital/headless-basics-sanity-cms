@@ -12,11 +12,15 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-// new imports
+// add our new import
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
 import cdfooter from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
 import cdnav from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 import linkItem from './linkItem'
+import dropdownMenu from './dropdownMenu'
+import linkGroup from './linkGroup'
+import socialLink from './socialLink'
+import additionalInformation from './additionalInformation'
 
 export const schemaTypes = [
   targetedLink,
@@ -41,5 +45,9 @@ export const schemaTypes = [
   herobanner,
   cdfooter,
   linkItem,
-  cdnav
+  cdnav,
+  dropdownMenu,
+  linkGroup,
+  socialLink,
+  additionalInformation
 ];
