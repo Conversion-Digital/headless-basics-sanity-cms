@@ -63,9 +63,12 @@ export const pageFields = [
       { type: 'cdnav' },
       { type: 'cdinsights' },
       { type: 'cdservices' },
-
-      // Add the new cdtestimonials type
-      { type: 'cdtestimonials' }
+      { type: 'cdtestimonials' },
+      { type: 'cdmission' },
+      { type: 'cdpartners' },
+      { type: 'cdclients' },
+      { type: 'cdcasestudies' },  
+      { type: 'cdcta' }
     ],
   }),
 ]
