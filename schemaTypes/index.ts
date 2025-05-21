@@ -28,9 +28,8 @@ import cdpartners from '@conversiondigital/headless-basics-components/src/theme/
 import cdclients from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdclients/sanity-schema'
 import { partnerItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/partnerItem'
 import { clientItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/clientItem'
-import { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/casestudyItem'
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
-import cdcasestudies from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
+import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 export const schemaTypes = [
   targetedLink,
   internalUrl,
