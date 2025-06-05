@@ -67,7 +67,7 @@ export const pageFields = [
       { type: 'cdmission' },
       { type: 'cdpartners' },
       { type: 'cdclients' },
-      { type: 'cdcasestudies' },  
+      { type: 'cdcasestudies' },
       { type: 'cdcta' }
     ],
   }),

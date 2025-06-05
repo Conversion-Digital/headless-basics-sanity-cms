@@ -11,30 +11,25 @@ import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
-import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
+import { targetedLink, internalUrl, externalUrl, linksList, linkItem } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
-import cdfooter, { linkGroup, socialLink } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
-import linkItem from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/linkItem'
-import dropdownMenu from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/dropdownMenu'
-import cdnav from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
-import cdinsights from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
-import cdservices from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
-import cdtestimonials from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdtestimonials/sanity-schema'
-import { insightsItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/insightsItem'
-import { serviceItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/serviceItem'
-import { singleTestimonial } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/singleTestimonial'
-import cdmission from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdmission/sanity-schema'
-import cdpartners from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdpartners/sanity-schema'
-import cdclients from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdclients/sanity-schema'
-import { partnerItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/partnerItem'
-import { clientItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/schemaTypes/clientItem'
+import cdfooter, { linkGroup, socialLink, additionalInformationType } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
+import cdinsights, { insightItem, topicItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
+import cdservices, { serviceItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
+import cdtestimonials, { singleTestimonial, videoTestimonial } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdtestimonials/sanity-schema'
+import cdmission, { keyPoint, promise } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdmission/sanity-schema'
+import cdpartners, { partnerItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdpartners/sanity-schema'
+import cdclients, { clientItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdclients/sanity-schema'
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
+import cdnav, { dropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+
 export const schemaTypes = [
   targetedLink,
   internalUrl,
   externalUrl,
   linksList,
+  linkItem,
   homepage,
   page,
   hero,
@@ -52,23 +47,27 @@ export const schemaTypes = [
   carousel,
   herobanner,
   cdfooter,
-  linkItem,
   linkGroup,
   socialLink,
-  dropdownMenu,
-  cdnav,
+  additionalInformationType,
   cdinsights,
-  insightsItem,
+  insightItem,
+  topicItem,
   cdservices,
   serviceItem,
   cdtestimonials,
   singleTestimonial,
   cdmission,
+  keyPoint,
+  promise,
   cdpartners,
   partnerItem,
   cdclients,
   clientItem,
   cdcasestudies,
   caseStudyItem,
-  cdcta // add cdcta to the array
+  cdcta,
+  cdnav,
+  dropdownMenu,
+  videoTestimonial,
 ];
