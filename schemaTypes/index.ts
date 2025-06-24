@@ -23,6 +23,9 @@ import cdclients, { clientItem }  from '@conversiondigital/headless-basics-compo
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 import cdnav, { dropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+import cdserviceintro from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceintro/sanity-schema'
+import cdservicestats from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
+import cdserviceofferings from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,
@@ -70,4 +73,7 @@ export const schemaTypes = [
   cdnav,
   dropdownMenu,
   videoTestimonial,
+  cdserviceintro,
+  cdservicestats,
+  cdserviceofferings,
 ];
