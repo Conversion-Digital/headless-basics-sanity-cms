@@ -12,7 +12,7 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList, linkItem } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
+import herobanner, { heroCaseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
 import cdfooter, { linkGroup, socialLink, additionalInformationType } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
 import cdinsights, { insightItem, topicItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
 import cdservices, { serviceItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
@@ -49,6 +49,7 @@ export const schemaTypes = [
   footerStructure,
   carousel,
   herobanner,
+  heroCaseStudyItem,
   cdfooter,
   linkGroup,
   socialLink,
