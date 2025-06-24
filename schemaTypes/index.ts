@@ -75,5 +75,5 @@ export const schemaTypes = [
   videoTestimonial,
   cdserviceintro,
   cdservicestats,
-  cdserviceofferings,
+  cdserviceofferings
 ];
