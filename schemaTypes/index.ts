@@ -24,8 +24,8 @@ import cdcta from '@conversiondigital/headless-basics-components/src/theme/conve
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 import cdnav, { dropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 import cdserviceintro from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceintro/sanity-schema'
-import cdservicestats from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
-import cdserviceofferings from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
+import cdservicestats, { cdserviceStatItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
+import cdserviceofferings, { cdserviceOfferingItem, cdserviceDetailItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,
@@ -75,5 +75,8 @@ export const schemaTypes = [
   videoTestimonial,
   cdserviceintro,
   cdservicestats,
-  cdserviceofferings
+  cdserviceStatItem,
+  cdserviceofferings,
+  cdserviceOfferingItem,
+  cdserviceDetailItem
 ];
