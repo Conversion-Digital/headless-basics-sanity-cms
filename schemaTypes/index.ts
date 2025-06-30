@@ -2,7 +2,7 @@ import homepage from './homepage'
 import { defineType } from 'sanity'
 import page from './page'
 import hero from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
-import carousel from '@conversiondigital/headless-basics-components/src/theme/default/components/carousel/sanity-schema'
+// import carousel from '@conversiondigital/headless-basics-components/src/theme/default/components/carousel/sanity-schema'
 import motto from '@conversiondigital/headless-basics-components/src/theme/default/components/motto/sanity-schema'
 import { footerLogo, footerButton, footerLinkSection, footerStructure } from '@conversiondigital/headless-basics-components/src/theme/default/components/footer/sanity-schema'
 import toggle from '@conversiondigital/headless-basics-components/src/theme/default/components/toggle/sanity-schema'
@@ -23,9 +23,8 @@ import cdclients, { clientItem }  from '@conversiondigital/headless-basics-compo
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 import cdnav, { dropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
-import cdserviceintro from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceintro/sanity-schema'
-import cdservicestats from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
-import cdserviceofferings from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
+// import cdservicestats, { serviceStatistic } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
+// import cdserviceofferings, { serviceOffering, serviceDetail } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
 
 export const schemaTypes = [
   targetedLink,
@@ -47,7 +46,7 @@ export const schemaTypes = [
   footerButton,
   footerLinkSection,
   footerStructure,
-  carousel,
+  // carousel,
   herobanner,
   heroCaseStudyItem,
   cdfooter,
@@ -74,7 +73,9 @@ export const schemaTypes = [
   cdnav,
   dropdownMenu,
   videoTestimonial,
-  cdserviceintro,
-  cdservicestats,
-  cdserviceofferings
+  // cdservicestats,
+  // serviceStatistic,
+  // cdserviceofferings,
+  // serviceOffering,
+  // serviceDetail,
 ];

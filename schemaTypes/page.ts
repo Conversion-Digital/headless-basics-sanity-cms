@@ -57,7 +57,6 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'carousel' },
       { type: 'herobanner' },
       { type: 'cdfooter' },
       { type: 'cdnav' },
@@ -69,9 +68,9 @@ export const pageFields = [
       { type: 'cdclients' },
       { type: 'cdcasestudies' },
       { type: 'cdcta' },
-      { type: 'cdserviceintro' },
-      { type: 'cdservicestats' },
-      { type: 'cdserviceofferings' },
+      // { type: 'cdserviceintro' },
+      // { type: 'cdservicestats' },
+      // { type: 'cdserviceofferings' }
     ],
   }),
 ]
