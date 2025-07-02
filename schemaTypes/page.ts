@@ -69,9 +69,9 @@ export const pageFields = [
       { type: 'cdclients' },
       { type: 'cdcasestudies' },
       { type: 'cdcta' },
-      { type: 'reference', name: 'cdserviceintroRef', title: 'Service Introduction', to: [{ type: 'cdserviceintro' }] },
-      { type: 'cdservicestats' },
-      { type: 'cdserviceofferings' },
+      { type: 'cdintroduction' },
+      { type: 'cdstatistics' },
+      { type: 'cdfaqs' },
     ],
   }),
 ]
