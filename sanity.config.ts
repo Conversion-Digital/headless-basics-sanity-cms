@@ -127,7 +127,8 @@ const sanityConfig = defineConfig({
   name: 'default',
   title: 'SanityShowcase',
   projectId: (import.meta.env.SANITY_STUDIO_PROJECT_ID as string).toLowerCase(),
-  dataset: 'production',
+  studioHost: process.env.SANITY_STUDIO_HOST,
+  dataset: process.env.SANITY_STUDIO_DATASET,
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
