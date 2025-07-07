@@ -15,7 +15,7 @@ import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondi
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
 import cdfooter, { linkGroup, socialLink, additionalInformationType } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
 import cdinsights, { insightItem, topicItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
-import cdservices, { serviceItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
+import cdservices, { serviceItem, serviceLink } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
 import cdtestimonials, { singleTestimonial, videoTestimonial } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdtestimonials/sanity-schema'
 import cdmission, { keyPoint, promise } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdmission/sanity-schema'
 import cdpartners, { partnerItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdpartners/sanity-schema'
@@ -58,6 +58,7 @@ export const schemaTypes = [
   topicItem,
   cdservices,
   serviceItem,
+  serviceLink,
   cdtestimonials,
   singleTestimonial,
   cdmission,
