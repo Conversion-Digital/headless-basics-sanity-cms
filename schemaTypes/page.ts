@@ -1,4 +1,3 @@
-
 import { defineField, defineType } from 'sanity'
 import { definePageType } from '@q42/sanity-plugin-page-tree'
 import { pageTreeConfig } from '../pageTreeConfig'
@@ -58,7 +57,21 @@ export const pageFields = [
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'carousel' }
+      { type: 'carousel' },
+      { type: 'herobanner' },
+      { type: 'cdfooter' },
+      { type: 'cdnav' },
+      { type: 'cdinsights' },
+      { type: 'cdservices' },
+      { type: 'cdtestimonials' },
+      { type: 'cdmission' },
+      { type: 'cdpartners' },
+      { type: 'cdclients' },
+      { type: 'cdcasestudies' },
+      { type: 'cdcta' },
+      { type: 'cdintroduction' },
+      { type: 'cdstatistics' },
+      { type: 'cdfaqs' },
     ],
   }),
 ]
