@@ -23,7 +23,7 @@ import cdclients, { clientItem }  from '@conversiondigital/headless-basics-compo
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 
-import cdnav, { dropdownMenu, linkItem, cdnavOverrideSettings } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+import cdnav, { dropdownMenu, linkItem, cdnavOverrideSettings, cdnavReference } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 import cdintroduction from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdintroduction/sanity-schema'
 import cdstatistics, { cdStatisticItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdstatistics/sanity-schema'
 import cdfaqs, { cdFaqItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfaqs/sanity-schema'
@@ -79,7 +79,6 @@ export const schemaTypes = [
   cdfooterReference,
   cdfooterOverrideSettings,
   videoTestimonial,
-
   cdintroduction,
   cdstatistics,
   cdStatisticItem,
