@@ -112,6 +112,17 @@ const structure = (S: StructureBuilder) =>
         ),
       S.divider(),
       S.listItem()
+        .title('Global Components')
+        .child(
+          S.list()
+            .title('Global Components')
+            .items([
+              S.documentTypeListItem('cdnav').title('Navigation (CD)'),
+              S.documentTypeListItem('cdfooter').title('Footer (CD)')
+            ])
+        ),
+      S.divider(),
+      S.listItem()
         .title('Structure')
         .child(
           S.list()
@@ -127,6 +138,7 @@ const sanityConfig = defineConfig({
   name: 'default',
   title: 'SanityShowcase',
   projectId: (import.meta.env.SANITY_STUDIO_PROJECT_ID as string).toLowerCase(),
+  studioHost: process.env.SANITY_STUDIO_HOST,
   dataset: 'production',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
