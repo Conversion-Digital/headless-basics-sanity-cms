@@ -11,12 +11,11 @@ import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
-import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
+import { targetedLink, internalUrl, externalUrl, linksList, linkItem } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
 // add our new import
 import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
-import cdfooter from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
-import cdnav from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
-import linkItem from './linkItem'
+import cdfooter, { socialLink as cdfooterSocialLink, linkGroup as cdfooterLinkGroup, additionalInformationType } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
+import cdnav, { dropdownMenu as cdnavDropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 import dropdownMenu from './dropdownMenu'
 import linkGroup from './linkGroup'
 import socialLink from './socialLink'
@@ -27,6 +26,7 @@ export const schemaTypes = [
   internalUrl,
   externalUrl,
   linksList,
+  linkItem,
   homepage,
   page,
   hero,
@@ -44,8 +44,10 @@ export const schemaTypes = [
   carousel,
   herobanner,
   cdfooter,
-  linkItem,
+  cdfooterLinkGroup,
+  additionalInformationType,
   cdnav,
+  cdnavDropdownMenu,
   dropdownMenu,
   linkGroup,
   socialLink,

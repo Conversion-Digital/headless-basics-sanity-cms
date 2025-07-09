@@ -5,7 +5,6 @@ export default defineType({
   name: 'gridBlock',
   title: 'Grid Block',
   type: 'object',
-  icon: DashboardIcon,
   fields: [
     defineField({
       name: 'title',
