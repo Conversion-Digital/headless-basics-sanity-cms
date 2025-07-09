@@ -9,7 +9,7 @@ console.log("[sanity.cli.ts][7] Sanity Project ID  :", projectId);
 const sanityConfig = defineCliConfig({
   api: {
     projectId: projectId,
-    dataset: process.env.SANITY_STUDIO_DATASET,
+    dataset: 'production',
     studioHost: process.env.SANITY_STUDIO_HOST
   },
   /**

@@ -52,14 +52,14 @@ export const pageFields = [
     title: 'Components',
     type: 'array',
     of: [
+      { type: 'cdnavReference' },
+      { type: 'cdnav' }, // Temporary - remove after migration
       { type: 'hero' },
+      { type: 'herobanner' },
       { type: 'toggle' },
       { type: 'textBlock' },
       { type: 'motto' },
       { type: 'gridBlock' },
-      { type: 'herobanner' },
-      { type: 'cdfooter' },
-      { type: 'cdnav' },
       { type: 'cdinsights' },
       { type: 'cdservices' },
       { type: 'cdtestimonials' },
@@ -68,6 +68,8 @@ export const pageFields = [
       { type: 'cdclients' },
       { type: 'cdcasestudies' },
       { type: 'cdcta' },
+      { type: 'cdfooterReference' },
+      { type: 'cdfooter' }, // Temporary - remove after migration
       // { type: 'cdserviceintro' },
       // { type: 'cdservicestats' },
       // { type: 'cdserviceofferings' }

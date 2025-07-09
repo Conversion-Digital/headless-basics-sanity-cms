@@ -12,8 +12,8 @@ import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
 import { targetedLink, internalUrl, externalUrl, linksList, linkItem } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-import herobanner, { heroCaseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
-import cdfooter, { linkGroup, socialLink, additionalInformationType } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
+import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
+import cdfooter, { linkGroup, socialLink, additionalInformationType, cdfooterReference, cdfooterOverrideSettings } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
 import cdinsights, { insightItem, topicItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
 import cdservices, { serviceItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
 import cdtestimonials, { singleTestimonial, videoTestimonial } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdtestimonials/sanity-schema'
@@ -22,7 +22,7 @@ import cdpartners, { partnerItem }  from '@conversiondigital/headless-basics-com
 import cdclients, { clientItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdclients/sanity-schema'
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
-import cdnav, { dropdownMenu } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+import cdnav, { dropdownMenu, cdnavReference, cdnavOverrideSettings } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 // import cdservicestats, { serviceStatistic } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservicestats/sanity-schema'
 // import cdserviceofferings, { serviceOffering, serviceDetail } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdserviceofferings/sanity-schema'
 
@@ -48,7 +48,6 @@ export const schemaTypes = [
   footerStructure,
   // carousel,
   herobanner,
-  heroCaseStudyItem,
   cdfooter,
   linkGroup,
   socialLink,
@@ -72,6 +71,10 @@ export const schemaTypes = [
   cdcta,
   cdnav,
   dropdownMenu,
+  cdnavReference,
+  cdnavOverrideSettings,
+  cdfooterReference,
+  cdfooterOverrideSettings,
   videoTestimonial,
   // cdservicestats,
   // serviceStatistic,
