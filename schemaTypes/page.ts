@@ -69,10 +69,10 @@ export const pageFields = [
       { type: 'cdcasestudies' },
       { type: 'cdcta' },
       { type: 'cdfooterReference' },
-      { type: 'cdfooter' }, // Temporary - remove after migration
-      // { type: 'cdserviceintro' },
-      // { type: 'cdservicestats' },
-      // { type: 'cdserviceofferings' }
+      { type: 'cdfooter' }, 
+      { type: 'cdintroduction' },
+      { type: 'cdstatistics' },
+      { type: 'cdfaqs' },
     ],
   }),
 ]
