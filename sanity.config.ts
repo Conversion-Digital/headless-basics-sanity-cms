@@ -117,7 +117,7 @@ const structure = (S: StructureBuilder) =>
           S.list()
             .title('Global Components')
             .items([
-              S.documentTypeListItem('cdnav').title('Navigation (CD)'),
+              S.documentTypeListItem('navigation').title('Navigation (CD)'),
               S.documentTypeListItem('cdfooter').title('Footer (CD)')
             ])
         ),

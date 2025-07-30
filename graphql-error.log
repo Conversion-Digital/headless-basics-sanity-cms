@@ -1,0 +1,17 @@
+[sanity.cli.ts][7] Sanity Project ID  : b1emumym
+[sanity.config.ts][149] Studio Host Setting: cd-test-anh
+[sanity.cli.ts][7] Sanity Project ID  : b1emumym
+[sanity.config.ts][149] Studio Host Setting: cd-test-anh
+[sanity.config.ts][129] Sanity Project ID  : b1emumym
+
+SchemaError: SchemaError
+    at ~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/index.js:68502:17
+    at Array.map (<anonymous>)
+    at ~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/index.js:68476:11
+    at Array.map (<anonymous>)
+    at prepareConfig (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/index.js:68460:34)
+    at Object.resolveConfig (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/index.js:68969:7)
+    at Object.getStudioWorkspaces (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/_chunks-cjs/getStudioWorkspaces.js:43:92)
+    at resolveGraphQLApis (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/_internal/cli/threads/getGraphQLAPIs.js:30:48)
+    at getGraphQLAPIsForked (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/_internal/cli/threads/getGraphQLAPIs.js:18:56)
+    at main (~/Desktop/CD/headless-basics-workspace/node_modules/.pnpm/sanity@4.2.0_@emotion+is-prop-valid@1.2.2_@types+node@20.17.24_@types+react-dom@19.1.6__e4c5f8c8acc36ab7a8b8404d88aa700f/node_modules/sanity/lib/_internal/cli/threads/getGraphQLAPIs.js:10:9)

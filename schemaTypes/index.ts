@@ -1,12 +1,12 @@
 import homepage from './homepage'
 import { defineType } from 'sanity'
 import page from './page'
-import hero from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
+import hero, { heroButton } from '@conversiondigital/headless-basics-components/src/theme/default/components/hero/sanity-schema'
 // import carousel from '@conversiondigital/headless-basics-components/src/theme/default/components/carousel/sanity-schema'
 import motto from '@conversiondigital/headless-basics-components/src/theme/default/components/motto/sanity-schema'
 import { footerLogo, footerButton, footerLinkSection, footerStructure } from '@conversiondigital/headless-basics-components/src/theme/default/components/footer/sanity-schema'
 import toggle from '@conversiondigital/headless-basics-components/src/theme/default/components/toggle/sanity-schema'
-import heroButton from './heroButton'
+// import heroButton from './heroButton' // Removed duplicate - already imported from hero component
 import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
@@ -23,7 +23,7 @@ import cdclients, { clientItem }  from '@conversiondigital/headless-basics-compo
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 
-import cdnav, {dropdownMenu, cdnavOverrideSettings, cdnavReference } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+import navigation, {dropdownMenu, navigationOverrideSettings, navigationReference } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/navigation/sanity-schema'
 import cdintroduction from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdintroduction/sanity-schema'
 import cdstatistics, { cdStatisticItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdstatistics/sanity-schema'
 import cdfaqs, { cdFaqItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfaqs/sanity-schema'
@@ -73,10 +73,10 @@ export const schemaTypes = [
   cdcasestudies,
   caseStudyItem,
   cdcta,
-  cdnav,
+  navigation,
   dropdownMenu,
-  cdnavReference,
-  cdnavOverrideSettings,
+  navigationReference,
+  navigationOverrideSettings,
   cdfooterReference,
   cdfooterOverrideSettings,
   videoTestimonial,

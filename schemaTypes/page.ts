@@ -52,8 +52,6 @@ export const pageFields = [
     title: 'Components',
     type: 'array',
     of: [
-      { type: 'cdnavReference' },
-      { type: 'cdnav' }, // Temporary - remove after migration
       { type: 'hero' },
       { type: 'herobanner' },
       { type: 'toggle' },
