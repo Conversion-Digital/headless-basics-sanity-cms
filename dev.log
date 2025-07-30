@@ -1,0 +1,15 @@
+
+> @conversiondigital/headless-basics-sanityshowcase@1.0.5 dev /Users/anhpham/Desktop/CD/headless-basics-workspace/packages/headless-basics-sanity-cms
+> sanity dev
+
+[sanity.cli.ts][7] Sanity Project ID  : b1emumym
+[sanity.config.ts][149] Studio Host Setting: cd-test-anh
+[sanity.cli.ts][7] Sanity Project ID  : b1emumym
+[sanity.config.ts][149] Studio Host Setting: cd-test-anh
+ℹ Running with auto-updates enabled
+✓ Checking configuration files...
+- Starting dev server
+✓ Starting dev server
+Sanity Studio using vite@6.3.5 ready in 257ms and running at http://localhost:3333/
+6:02:57 PM [vite] (client) page reload .sanity/runtime/index.html
+6:02:57 PM [vite] (client) page reload .sanity/runtime/app.js

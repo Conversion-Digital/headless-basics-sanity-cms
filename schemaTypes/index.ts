@@ -11,8 +11,8 @@ import textBlock from './textBlock'
 import seo from './seo'
 import pageMeta from './pageMeta'
 import gridBlock from './gridBlock'
-import { targetedLink, internalUrl, externalUrl, linksList } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
-import herobanner from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
+import { targetedLink, internalUrl, externalUrl, linksList, linkItem } from '@conversiondigital/headless-basics-data/src/cms/sanity/sanityCommonSchema'
+import herobanner, { heroCaseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/herobanner/sanity-schema'
 import cdfooter, { linkGroup, socialLink, additionalInformationType, cdfooterReference, cdfooterOverrideSettings } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfooter/sanity-schema'
 import cdinsights, { insightItem, topicItem }  from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdinsights/sanity-schema'
 import cdservices, { serviceItem, serviceLink } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdservices/sanity-schema'
@@ -23,7 +23,7 @@ import cdclients, { clientItem }  from '@conversiondigital/headless-basics-compo
 import cdcta from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcta/sanity-schema'
 import cdcasestudies, { caseStudyItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdcasestudies/sanity-schema'
 
-import cdnav, { dropdownMenu, linkItem, cdnavOverrideSettings, cdnavReference } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
+import cdnav, {dropdownMenu, cdnavOverrideSettings, cdnavReference } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdnav/sanity-schema'
 import cdintroduction from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdintroduction/sanity-schema'
 import cdstatistics, { cdStatisticItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdstatistics/sanity-schema'
 import cdfaqs, { cdFaqItem } from '@conversiondigital/headless-basics-components/src/theme/conversion/components/cdfaqs/sanity-schema'
@@ -50,6 +50,7 @@ export const schemaTypes = [
   footerStructure,
   // carousel,
   herobanner,
+  heroCaseStudyItem,
   cdfooter,
   linkGroup,
   socialLink,
